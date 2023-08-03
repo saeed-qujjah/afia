@@ -1,0 +1,83 @@
+/* .review ul li.active {
+    color: var(--gray-color);
+    background-color: var(--p-color);
+    padding-top: 10px;
+    width: 160px;
+    height: 70px;
+    border-radius: 20px 20px 0 0;
+    text-align: center;
+  }
+  .review ul li:hover {
+      color: var(--gray-color);
+      padding-top: 10px;
+      width: 160px;
+      height: 70px;
+      text-align: center;
+  }
+  .review li.unactive {
+    color: var(--green-color);
+    width: 160px;
+    height: 70px;
+    border-radius: 20px 20px 0 0;
+    text-align: center;
+    padding-top: 10px;
+  }
+  .review ul li {
+    position: relative;
+    cursor: pointer;
+  }
+  .review ul li.active::before {
+    position: absolute;
+    content: "";
+    bottom: 6px;
+    left: -18px;
+    transform: rotate(-45deg);
+    height: 20px;
+    width:  35px;
+    transition: 0.2 ease-in-out;
+    background-color: var(--p-color);
+  }
+  .review ul li.active::after {
+    position: absolute;
+    content: "";
+    bottom: 6px;
+    right: -18px;
+    transform: rotate(45deg);
+    height: 20px;
+    width:  35px;
+    transition: 0.2 ease-in-out;
+    background-color: var(--p-color);
+  } */
+
+  .review ul li.active {
+    color: var(--gray-color);
+    background-color: var(--green-color);
+    transition: 0.2 ease-in-out;
+    padding-top: 15px;
+    width: 200px;
+    height: 58px;
+    border-radius: 30px;
+    text-align: center;
+  }
+  .review ul li.unactive:hover {
+    color: var(--gray-color);
+    /* background-color: var(--green-color); */
+    transition: 0.2 ease-in-out;
+    padding-top: 15px;
+    width: 200px;
+    height: 58px;
+    border-radius: 30px;
+    text-align: center;
+  }
+  .review li.unactive {
+    color: var(--green-color);
+    width: 200px;
+    height: 58px;
+    border-radius: 20px 20px 0 0;
+    text-align: center;
+    padding-top: 15px;
+  }
+  .review ul li {
+    position: relative;
+    cursor: pointer;
+  }

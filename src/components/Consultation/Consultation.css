@@ -1,0 +1,117 @@
+.features .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin: auto;
+  max-width: 100%;
+  font-family: "";
+}
+.features .container i {
+  color: var(--greenLigth-color);
+}
+.features .container .feat {
+  background-color: white;
+  border-radius: 40px 10px;
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+}
+.features .container .feat h3 {
+  font-family: "Caprasimo";
+  /* font-weight: ; */
+  margin: 30px 0;
+  color: var(--gray-color);
+}
+.features .feat p {
+  color: var(--green-color);
+  line-height: 1.8;
+  font-size: 15px;
+}
+/* 
+.consoltation ul li {
+  position: relative;
+  cursor: pointer;
+}
+.consoltation ul li.active,
+.consoltation ul li:hover {
+  color: var(--gray-color);
+}
+.consoltation ul li.active::before,
+.consoltation ul li:hover::before {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 10px;
+  height: 2px;
+  width: 60%;
+  transition: 0.2 ease-in-out;
+  border-radius: 50%;
+  background-color: var(--greenLigth-color);
+} */
+
+.consoltation ul li.active {
+  color: var(--gray-color);
+  background-color: var(--green-color);
+  transition: 0.2 ease-in-out;
+  padding-top: 15px;
+  width: 200px;
+  height: 58px;
+  border-radius: 30px;
+  text-align: center;
+}
+.consoltation ul li.unactive:hover {
+  color: var(--gray-color);
+  /* background-color: var(--green-color); */
+  transition: 0.2 ease-in-out;
+  padding-top: 15px;
+  width: 200px;
+  height: 58px;
+  border-radius: 30px;
+  text-align: center;
+}
+.consoltation li.unactive {
+  color: var(--green-color);
+  width: 200px;
+  height: 58px;
+  border-radius: 20px 20px 0 0;
+  text-align: center;
+  padding-top: 15px;
+}
+.consoltation ul li {
+  position: relative;
+  cursor: pointer;
+}
+/* .consoltation ul li.active::before {
+  position: absolute;
+  content: "";
+  bottom: 6px;
+  left: -18px;
+  transform: rotate(-45deg);
+  height: 20px;
+  width:  35px;
+  transition: 0.2 ease-in-out;
+  background-color: var(--p-color);
+}
+.consoltation ul li.active::after {
+  position: absolute;
+  content: "";
+  bottom: 6px;
+  right: -18px;
+  transform: rotate(45deg);
+  height: 20px;
+  width:  35px;
+  transition: 0.2 ease-in-out;
+  background-color: var(--p-color);
+} */
+
+/* .consoltation ul li.active::after {
+  position: absolute;
+  content: "";
+  bottom: 31px;
+  right: 0px;
+  height: 50px;
+  width:  100px;
+  transition: 0.2 ease-in-out;
+  border-radius: 100%;
+  background-color: var(--p-color);
+} */
