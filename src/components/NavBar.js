@@ -9,9 +9,12 @@ import dating from "../global/images/calendar.png";
 import home from "../global/images/home.png";
 import logout from "../global/images/logout.png";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { authAction } from "../store/auth";
 
 const NavBar = ({ page }) => {
   const nav = useNavigate();
+  const dispatch = useDispatch()
   const [pageActive, setPageActive] = useState("");
   const [showSetting,setShowSetting] = useState(false);
 
@@ -23,6 +26,7 @@ const NavBar = ({ page }) => {
     Cookies.remove("user");
     Cookies.remove("accessToken");
     Cookies.remove("refeshToken");
+    dispatch(authAction.logoutHandler());
     nav("/AboutUs");
   };
 

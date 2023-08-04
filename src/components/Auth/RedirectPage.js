@@ -1,21 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import AuthContext from "../store/auth-context";
 import Cookies from "js-cookie";
 
 const RedirectPage = () => {
-  // const ctx = useContext(AuthContext);
-  // const nav = useNavigate();
+  const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
+  const token = Cookies.get("accessToken");
+  const nav = useNavigate();
 
-  // useEffect(() => {
-  //   if (!ctx.isLoggedIn) {
-  //     nav("/Login");
-  //   } else if (+Cookies.get("isAdmin") === 1) {
-  //     nav("/TableAll");
-  //   } else {
-  //     nav("/QrReader");
-  //   }
-  // }, [ctx.isLoggedIn]);
+  useEffect(() => {
+    if (!!token) {
+      if (user ? !!user?.phone_number : false) nav("/Aafia/Home");
+      else nav("/CompleteProfileInfo");
+    } else {
+      if (user ? !user?.email_verified : false) nav("/CodeVerification");
+      else nav("/login");
+    }
+  }, [user, token]);
 
   return <div></div>;
 };

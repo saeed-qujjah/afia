@@ -37,7 +37,10 @@ const Register = () => {
         .post(API.auth.SIGN_UP, userDataRegister)
         .then((res) => {
           // dispatch(authAction.replaceUserData(res.data.data.user));
-          Cookies.set('user', JSON.stringify(res.data.data.user));
+          Cookies.set('user', JSON.stringify(res.data.data.user) ,{
+            path:"/",
+            expires:10,
+          });
           swal({
             title: `${res.data.message}`,
             timer: 3000,

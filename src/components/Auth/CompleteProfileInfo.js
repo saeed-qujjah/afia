@@ -2,15 +2,17 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UseAxiosGet from "../../hooks/useAxiosGet";
 import { API } from "../../data/config";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { authAction } from "../../store/auth";
 
 const CompleteProfileInfo = () => {
   const user = JSON.parse(Cookies.get("user"));
+  const dispatch = useDispatch();
   const isDoctor = user.role === 1 ? false : true;
   const nav = useNavigate();
   const [country, setCountry] = useState("");
@@ -118,10 +120,6 @@ const CompleteProfileInfo = () => {
     const cityId = cities?.data.filter(
       (array) => array.name === completeData.city
     )[0].id;
-
-    const specializationId = specializations?.data.filter(
-      (array) => array.name === completeData.specialization
-    )[0].id;
     const formData = new FormData();
     formData.append("phone_number", completeData.phone_number);
     formData.append("first_name", user.first_name);
@@ -131,6 +129,9 @@ const CompleteProfileInfo = () => {
     formData.append("photo", completeData.photo);
     if (completeData.city) formData.append("city_id", cityId);
     if (isDoctor) {
+      const specializationId = specializations?.data.filter(
+        (array) => array.name === completeData.specialization
+      )[0].id;
       formData.append("license", completeData.license);
       formData.append(
         "available_for_meeting",
@@ -153,13 +154,17 @@ const CompleteProfileInfo = () => {
         }
       })
       .then((res) => {
-        Cookies.set("user", JSON.stringify(res.data.data));
+        Cookies.set("user", JSON.stringify(res.data.data), {
+          path: "/",
+          expires: 10
+        });
         swal({
           title: `${res.data.message}`,
-          timer: `${isDoctor ? "5000" : "3000"}`,
+          timer: "5000",
           icon: "success"
         });
         setTimeout(() => {
+          dispatch(authAction.loginHandler(true));
           if (isDoctor) nav("/AboutUs");
           else nav("/Aafia/Home");
         }, [3040]);

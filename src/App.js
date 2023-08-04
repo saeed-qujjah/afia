@@ -13,56 +13,27 @@ import ConReview from "./components/Consultation/ConReview";
 import CodeVerification from "./components/Auth/CodeVerification";
 import CompleteProfileInfo from "./components/Auth/CompleteProfileInfo";
 import RedirectPage from "./components/Auth/RedirectPage";
-import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { API } from "./data/config";
 import UseAxiosGet from "./hooks/useAxiosGet";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authAction } from "./store/auth";
 
-const getLoggedInStatus = () => {
-  const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
-  const token = Cookies.get("accessToken");
-  console.log(token ? true : false);
-  console.log(user ? user?.phone_number && user?.email_verified : false);
-  console.log(user?.email_verified);
-  const isLoggedIn = token
-    ? true
-    : false && (user ? user?.phone_number && user?.email_verified : false);
-  return isLoggedIn;
-};
-
 function App() {
-  const isLoggedIn = getLoggedInStatus();
+  const isLoggedIn = useSelector((state) => state.auth.isLogged);
   const dispatch = useDispatch();
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const user = Cookies.get("user")
-  //  ? JSON.parse(Cookies.get("user")) : null;
   console.log(isLoggedIn);
-  // const isLoggedIn =
-  //   !!Cookies.get("accessToken") && !!user?.phone_number && user?.email_verified;
+
   const { data: specializations } = UseAxiosGet(API.static.GET_SPECIALIZATIONS);
   useEffect(() => {
     if (!specializations) return;
     dispatch(authAction.replaceSpecializations(specializations.data));
   }, [specializations, dispatch]);
 
-  // useEffect(() => {
-  //   if (!Cookies.get("user")) setIsLoggedIn(false);
-  //   else {
-  //     const user = JSON.parse(Cookies.get("user"));
-  //     setIsLoggedIn(
-  //       !!Cookies.get("accessToken") &&
-  //         !!user?.phone_number &&
-  //         user?.email_verified
-  //     );
-  //   }
-  // }, [user]);
-
   return (
     <div className="App">
       <Routes>
-        {!isLoggedIn && <Route path="/" element={<RedirectPage />}></Route>}
+        <Route path="/" element={<RedirectPage />}></Route>
         {!isLoggedIn && <Route path="/AboutUs" element={<AboutUs />}></Route>}
         {!isLoggedIn && <Route path="/Login" element={<Login />}></Route>}
         {!isLoggedIn && <Route path="/Register" element={<Register />}></Route>}

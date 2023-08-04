@@ -4,8 +4,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { API } from "../../data/config";
 import Cookies from "js-cookie";
 import swal from "sweetalert";
+import { useDispatch } from "react-redux";
+import { authAction } from "../../store/auth";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const nav = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState(null);
@@ -16,9 +19,18 @@ const Login = () => {
     axios
       .post(API.auth.LOGIN, { email, password })
       .then((res) => {
-        Cookies.set("user", JSON.stringify(res.data.data.user));
-        Cookies.set("accessToken", res.data.data.access);
-        Cookies.set("refeshToken", res.data.data.refresh);
+        Cookies.set("user", JSON.stringify(res.data.data.user) ,{
+          path:"/",
+          expires:10,
+        });
+        Cookies.set("accessToken", res.data.data.access ,{
+          path:"/",
+          expires:10,
+        });
+        Cookies.set("refeshToken", res.data.data.refresh ,{
+          path:"/",
+          expires:10,
+        });
         swal({
           title: `${res.data.message}`,
           timer: 3000,
@@ -28,7 +40,10 @@ const Login = () => {
           if (!res.data.data.user.email_verified) nav("/CodeVerification");
           else if (!res.data.data.user.phone_number)
             nav("/CompleteProfileInfo");
-          else nav("/Aafia/Home");
+          else {
+            nav("/Aafia/Home");
+            dispatch(authAction.loginHandler(true));
+          }
         }, [3040]);
       })
       .catch((err) => {

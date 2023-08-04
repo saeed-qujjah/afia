@@ -24,9 +24,18 @@ const CodeVerification = () => {
       })
       .then((res) => {
         console.log(res.data);
-        Cookies.set("user", JSON.stringify(res.data.data.user));
-        Cookies.set("accessToken", res.data.data.access);
-        Cookies.set("refeshToken", res.data.data.refresh);
+        Cookies.set("user", JSON.stringify(res.data.data.user) ,{
+          path:"/",
+          expires:10,
+        });
+        Cookies.set("accessToken", res.data.data.access ,{
+          path:"/",
+          expires:10,
+        });
+        Cookies.set("refeshToken", res.data.data.refresh ,{
+          path:"/",
+          expires:10,
+        });
         swal({
           title: `${res.data.message}`,
           timer: 3000,
