@@ -16,7 +16,6 @@ import TrReview from './TrReview';
 
 const ViewReviews = () => {
   const [del, setDel] = useState();
-  const [idDelete, setIdDelete] = useState();
   const [revId, setRevId] = useState("");
   const [reviews,setReviews] = useState([])
   const [showDetails, setShowDetails] = useState(false);
@@ -91,10 +90,10 @@ const ViewReviews = () => {
       )}
        {showDetails && (
         <ReviewForm
-          id={revId}
           method={"edit"} 
-          review={showDetails}
-          onBack={editBackHandler}
+          reviewEdit={showDetails}
+          consultation={showDetails.consultation}
+          goBackHandler={editBackHandler}
         />
       )}
        {showReply && (
@@ -132,14 +131,15 @@ const ViewReviews = () => {
           <tr>
             <th>Specialization</th>
             <th>Doctor</th>
-            <th>Review requester</th>
+            <th>Requester</th>
             <th>Review reason</th>
             <th>status</th>
+            <th>Date created</th>
             <th>procedures</th>
           </tr>
         </thead>
         <tbody>
-        {/* {reviews.data?.map((review, index) => {
+        {reviews.data?.map((review, index) => {
             return (
               <TrReview
                 key={index}
@@ -149,7 +149,7 @@ const ViewReviews = () => {
                 onDelete={deleteHandler}
               />
             );
-          })} */}
+          })}
           {/* <tr>
             <td>osama</td>
             <td>osama</td>

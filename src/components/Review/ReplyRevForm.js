@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReplyRevForm = ({onBack}) => {
+const ReplyRevForm = ({onBack,reviewReply}) => {
     return (
         <div
         style={{ backgroundColor: "rgb(0 0 0 / 40%)" }}
@@ -16,8 +16,7 @@ const ReplyRevForm = ({onBack}) => {
                   className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                   type="text"
                   readOnly
-                  placeholder="Department"
-                  // value={department}
+                  value={reviewReply.consultation.doctor.specialization.name}
                 />
                 <label className="top-top">Specialization</label>
               </div>
@@ -25,7 +24,8 @@ const ReplyRevForm = ({onBack}) => {
                 <input
                   className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                   type="text"
-                  // placeholder="Last Name"
+                  readOnly
+                  value={`${reviewReply.consultation.doctor.first_name} ${reviewReply.consultation.doctor.last_name}`}
                 />
                 <label className="top-top">Doctor</label>
               </div>
@@ -33,24 +33,27 @@ const ReplyRevForm = ({onBack}) => {
             <div className="child w-[100%] relative mb-5">
               <input
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
-                type="email"
-                // placeholder="Email"
+                type="text"
+                readOnly
+                value={reviewReply.review_reasons}
               />
               <label className="top-top">Review reason</label>
             </div>
             <div className="child w-[100%] relative mb-5">
               <input
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
-                type="password"
-                // placeholder="Password"
+                type="text"
+                readOnly
+                value={reviewReply.diagnosis}
               />
               <label className="top-top">Diagnosis</label>
             </div>
             <div className="child w-[100%] relative mb-5">
             <input
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
-                type="password"
-                // placeholder="Password"
+                type="text"
+                readOnly
+                value={reviewReply.prescription}
               />
               <label className="top-top">Prescription</label>
             </div>
@@ -60,8 +63,7 @@ const ReplyRevForm = ({onBack}) => {
                   className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                   type="text"
                   readOnly
-                  placeholder="Department"
-                  // value={department}
+                  value={reviewReply.treatment_duration}
                 />
                 <label className="top-top">Treatment time</label>
               </div>
@@ -69,7 +71,8 @@ const ReplyRevForm = ({onBack}) => {
                 <input
                   className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                   type="text"
-                  // placeholder="Last Name"
+                  readOnly
+                  // value={}
                 />
                 <label className="top-top">Review time</label>
               </div>

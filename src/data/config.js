@@ -2,6 +2,7 @@ const BASE_URL = "http://192.168.1.111:8000/api";
 const AUTH_URL = `${BASE_URL}/auth`;
 const PROFILE_URL = `${BASE_URL}/profile`;
 const CONSULTATIONS_URL = `${BASE_URL}/consultation`;
+const ADVICE_URL = `${BASE_URL}/advice`;
 
 export const API = {
   auth: {
@@ -15,7 +16,7 @@ export const API = {
   profile: {
     DOCTOR_PROFILE: `${PROFILE_URL}/doctor-profiles/me/`,
     PATIENT_PROFILE: `${PROFILE_URL}/patient-profiles/me/`,
-    GET_DOCTORS_FOR_SPECIALIZATION: `${PROFILE_URL}/doctors/`,
+    GET_DOCTORS_FOR_SPECIALIZATION: `${PROFILE_URL}/doctors/`
   },
   static: {
     GET_COUNTRIES: `${BASE_URL}/statics/countries/`,
@@ -25,5 +26,9 @@ export const API = {
   consultations: {
     CONSULTATIONS: `${CONSULTATIONS_URL}/consultations/`,
     REVIEWS: `${CONSULTATIONS_URL}/reviews/`
-  }
+  },
+  advice: {
+    ADVICE: `${ADVICE_URL}/advices/`
+  },
+  
 };

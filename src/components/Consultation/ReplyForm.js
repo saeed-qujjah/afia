@@ -61,7 +61,7 @@ const ReplyForm = ({onBack,consultationReply}) => {
           <div className="w-[100%] relative flex justify-between items-center">
             <div className="child">
               <input
-                className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
+                className=" border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                 type="text"
                 readOnly
                 value={consultationReply.treatment_duration}

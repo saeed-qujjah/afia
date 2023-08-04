@@ -4,29 +4,25 @@ import capsule2 from "../../global/images/capsule.png";
 import capsule3 from "../../global/images/pills(1).png";
 import medical from "../../global/images/medicine.png";
 import checked from "../../global/images/checked.png";
-import hand from "../../global/images/stethoscope-doctors-desk-medical-concept-corona-virus-covid-19-stethoscope-eyeglasses-face-mask-blue-desk-protection-against-virus-coronavirus-flu-colds-diseases-flat-lay-top-view.jpg";
+import hand from "../../global/images/stethososcope-doctors.jpg";
 import steth from "../../global/images/capsule(1).png";
 import steth2 from "../../global/images/stethoscope.png";
 import plaster from "../../global/images/checked.png";
 import heart from "../../global/images/like.png";
 import bandage from "../../global/images/bandage.png";
 import footer from "../../global/images/top-view-health-still-life-with-copy-space.jpg";
+import UseAxiosGet from "../../hooks/useAxiosGet";
+import { API } from "../../data/config";
 
 const Advices = () => {
-  // Stay hydrated: Drinking enough water is essential for maintaining good health. شرب الماء للبقاء رظبا
-  // Get enough sleep: Adequate sleep is important for overall health and wellbeing. الحصول على قسط كافٍ من النوم: النوم الكافي مهم للصحة العامة والرفاهية.
-  // Exercise regularly: Regular exercise can help improve overall health and reduce the risk of chronic diseases. ممارسة الرياضة بانتظام: يمكن أن تساعد التمارين المنتظمة في تحسين الصحة العامة وتقليل مخاطر الإصابة بالأمراض المزمنة.
-  // Eat a healthy diet: A balanced diet that is rich in fruits, vegetables, whole grains, and lean proteins can help maintain good health. اتباع نظام غذائي صحي: يمكن أن يساعد النظام الغذائي المتوازن الغني بالفواكه والخضروات والحبوب الكاملة والبروتينات الخالية من الدهون في الحفاظ على صحة جيدة.
-  // Practice good hygiene: Good personal hygiene practices such as washing hands regularly and covering coughs and sneezes can help prevent the spread of germs and illness. ممارسة النظافة الجيدة: ممارسات النظافة الشخصية الجيدة مثل غسل اليدين بانتظام وتغطية السعال والعطس يمكن أن تساعد في منع انتشار الجراثيم والأمراض.
-  // Manage stress: Chronic stress can have negative effects on both mental and physical health.  إدارة الإجهاد: يمكن أن يكون للتوتر المزمن آثار سلبية على الصحة العقلية والبدنية.
-  // Stay up-to-date on preventive health screenings: Regular preventive health screenings can help detect and treat health problems early.ابق على اطلاع على الفحوصات الصحية الوقائية: يمكن أن تساعد الفحوصات الصحية الوقائية المنتظمة في اكتشاف المشكلات الصحية وعلاجها مبكرًا.
+  const {data} = UseAxiosGet(API.advice.ADVICE)
+  console.log(data)
   return (
     <div className="pt-[85px] ">
       <div className="mb-[100px]">
         <img src={capsule} className="w-[500px] ml-20" alt="" />
         <div className="w-[277px] text-[var(--gray-color)] bg-[var(--p-color)] h-[114px] absolute top-[416px] left-[120px] rounded-lg">
-          Always consult a healthcare provider before taking any medication,
-          even over-the-counter drugs.
+          {data?.data.short_advices[0].content}
           {/* taking medication without proper guidance
           from a healthcare provider can lead to serious health problems,
           including adverse reactions, drug interactions, and other
@@ -35,25 +31,19 @@ const Advices = () => {
         <div className="flex justify-between w-[500px] text-[var(--gray-color)] items-center absolute top-36 left-[57%]">
           <img src={checked} className="w-12" alt="" />
           <p className="w-[410px]">
-            taking medication without proper guidance from a healthcare provider
-            can lead to serious health problems, including adverse reactions,
-            drug interactions, and other complications.
+          {data?.data.long_advices[0].content}
           </p>
         </div>
         <div className="flex justify-between w-[500px] text-[var(--gray-color)] items-center absolute top-[50%] left-[45%]">
           <img src={checked} className="w-12" alt="" />
           <p className="w-[410px]">
-            Certain medications may not be safe for everyone, especially for
-            people with certain medical conditions or who are taking other
-            medications.
+          {data?.data.long_advices[1].content}
           </p>
         </div>
         <div className="flex justify-between w-[500px] text-[var(--gray-color)] items-center absolute top-[73%] left-[57%]">
           <img src={checked} className="w-12" alt="" />
           <p className="w-[410px]">
-            Never change the dosage or frequency of a medication without
-            consulting a healthcare provider, as this can also lead to serious
-            health problems.
+          {data?.data.long_advices[2].content}
           </p>
         </div>
       </div>
@@ -89,60 +79,48 @@ const Advices = () => {
         <div className="w-20 h-20 bg-[var(--greenLigth-color)] absolute top-[690px] rounded-full left-[80%]"></div> */}
         <img src={steth2} alt="" className="mb-5" />
         <p className="absolute top-[26%]  left-[108px] text-center w-[230px]">
-          Get enough sleep: Adequate sleep is important for overall health and
-          wellbeing.
+        {data?.data.short_advices[1].content}
         </p>
         <div className="absolute w-[430px] top-[20%] left-[67%] flex justify-between items-start bg-[var(--p-color)] py-10 px-2 rounded-2xl h-[180px]">
           <img src={plaster} className="w-12" alt="" />
           <p className="w-[350px]">
-            Manage stress: Chronic stress can have negative effects on both
-            mental and physical health.
+          {data?.data.meduim_advices[0].content}
           </p>
         </div>
         <div className="absolute w-[430px] top-[20%] left-[32%] flex justify-between items-start bg-[var(--p-color)] py-10 px-2 rounded-2xl h-[180px]">
           <img src={plaster} className="w-12" alt="" />
           <p className="w-[350px]">
-            Eat a healthy diet: A balanced diet that is rich in fruits,
-            vegetables, whole grains, and lean proteins can help maintain good
-            health.
+          {data?.data.meduim_advices[1].content}
           </p>
         </div>
         <div className="absolute w-[430px] top-[58%] left-[50%] flex justify-between items-start bg-[var(--p-color)] py-10 px-2 rounded-2xl h-[180px]">
           <img src={plaster} className="w-12" alt="" />
           <p className="w-[350px]">
-            Exercise regularly: Regular exercise can help improve overall health
-            and reduce the risk of chronic diseases.
+          {data?.data.meduim_advices[2].content}
           </p>
         </div>
       </div>
       <div className="relative my-[40px] h-[100vh]">
         <img src={capsule} className="w-[500px] absolute right-11" alt="" />
         <div className="w-[277px] text-[var(--gray-color)] bg-[var(--p-color)] h-[100px] absolute top-[345px] right-[223px] rounded-lg">
-          Stay hydrated: Drinking enough water is essential for maintaining good
-          health.
+        {data?.data.short_advices[2].content}
         </div>
         <div className="flex justify-between w-[500px] text-[var(--gray-color)] items-center absolute top-36 right-[57%]">
           <img src={checked} className="w-12" alt="" />
           <p className="w-[410px]">
-            Stay up-to-date on preventive health screenings: Regular preventive
-            health screenings can help detect and treat health problems early.
+          {data?.data.long_advices[3].content}
           </p>
         </div>
         <div className="flex justify-between w-[500px] text-[var(--gray-color)] items-center absolute top-[50%] right-[45%]">
           <img src={checked} className="w-12" alt="" />
           <p className="w-[410px]">
-            Practice good hygiene: Good personal hygiene practices such as
-            washing hands regularly and covering coughs and sneezes can help
-            prevent the spread of germs and illness.
+          {data?.data.long_advices[4].content}
           </p>
         </div>
         <div className="flex justify-between w-[500px] text-[var(--gray-color)] items-center absolute top-[73%] right-[57%]">
           <img src={checked} className="w-12" alt="" />
           <p className="w-[410px]">
-            Your health is important, and taking the steps outlined by your
-            doctor can help you maintain it. Remember to prioritize self-care
-            and seek medical attention when needed, and you'll be well on your
-            way to a happy and healthy life.
+          {data?.data.long_advices[5].content}
           </p>
         </div>
       </div>

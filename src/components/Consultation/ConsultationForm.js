@@ -35,7 +35,7 @@ const ConsultationForm = ({
   const { data: doctors } = UseAxiosGet(
     `${API.profile.GET_DOCTORS_FOR_SPECIALIZATION}?specialization_id=${consultation.specialization_id}`
   );
-  console.log(doctors);
+
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setConsultation((prev) => {
@@ -267,7 +267,7 @@ const ConsultationForm = ({
             <div className="w-[31%] flex justify-between items-center mb-8 mt-5">
               <button
                 type="submit"
-                className="py-[9px] w-[105px] text-[var(--p-color)] px-[27px] font-bold bg-[var(--gray-color)] cursor-pointer shadow-lg rounded-lg"
+                className={`${method === "edit" ? "w-[105px]" : "" } py-[9px] text-[var(--p-color)] px-[30px] font-bold bg-[var(--gray-color)] cursor-pointer shadow-lg rounded-lg`}
               >
                 {method === "edit" ? "Edit" : "Submit"}
               </button>

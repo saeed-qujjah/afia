@@ -7,15 +7,22 @@ import axios from "axios";
 import DeletePerson from "../../global/DeletePerson";
 import EditRev from "../Review/EditRev";
 import ReplyRevForm from "../Review/ReplyRevForm";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import UseAxiosGet from "../../hooks/useAxiosGet";
+import { API } from "../../data/config";
+import ReviewForm from "../Review/ReviewForm";
+import TrReview from "../Review/TrReview";
 
 const ConReview = () => {
   const [del, setDel] = useState();
   const [revId, setRevId] = useState("");
-  const [idDelete, setIdDelete] = useState();
+  const [reviews,setReviews] = useState([])
   const [showDetails, setShowDetails] = useState(false);
   const [showReply, setShowReply] = useState(false);
   const [fetchAgain, setFetchAgain] = useState(false);
+  const param = useParams()
+  // const {data} = UseAxiosGet(`${API.consultations.REVIEWS}?consultation_id=${param.id}/`)
+  // console.log(data.data.data)
 
   const pageRef = useRef(null);
   const location = useLocation();
@@ -24,23 +31,23 @@ const ConReview = () => {
     pageRef.current.scrollIntoView({ behavior: 'smooth' });
   }, [location]);
 
-  const deleteHandler = (idDelete) => {
-    setIdDelete(idDelete);
+  const deleteHandler = (id) => {
+    setRevId(id);
     setDel(true);
   };
 
   const confrimHandler = () => {
     axios
-      .delete(`http://localhost:8000/api/Admin/delete/${idDelete}`, {
-        headers: {
-          // Authorization: "Bearer " + Cookies.get("token"),
-        }
-      })
-      .then(() => {
-        setDel(false);
-        // setDisplay(display.filter((array) => array.id !== idDelete));
-      });
-  };
+    .delete(`${API.consultations.REVIEWS}${revId}`, {
+      headers: {
+        Authorization: "JWT " + Cookies.get("accessToken")
+      }
+    })
+    .then((res) => {
+      setDel(false);
+      setFetchAgain(!fetchAgain)
+    });
+  }
 
   const deleteBackHandler = () => {
     setDel(false);
@@ -54,85 +61,85 @@ const ConReview = () => {
   };
 
   const fetchHandler = useCallback(() => {
-    // if (param.id === "all") {
     axios
-      .get(`http://localhost:8000/api/Reports/Show/GetAllReportsForThisUser`, {
-        headers: {
-          Authorization: "Bearer " + Cookies.get("token")
-        }
-      })
-      .then((res) => {
-        console.log(res.data);
-      });
-    // } else {
-    axios
-      .get(
-        // `http://localhost:8000/api/Reports/Show/GetUserReports/${param.id}`,
-        {
-          headers: {
-            // Authorization: "Bearer " + Cookies.get("token"),
-          }
-        }
-      )
-      .then((res) => {
-        // setCoMa(res.data.CoMa);
-        // setallReport(res.data.data.data);
-      });
-    axios
-      .get(`http://localhost:8000/api/Tasks`, {
-        headers: {
-          Authorization: "Bearer " + Cookies.get("token")
-        }
-      })
-      .then((res) => {
-        console.log(res.data.data);
-        // setTaskComplete(
-        //   res.data.data.Complete || res.data.data.Task_Ref.Person_Task
-        // );
-        // setDataTask(res.data.data);
-      });
-    // }
+    .get(`${API.consultations.REVIEWS}?consultation_id=${+param.id}`, {
+      headers: {
+        Authorization: "JWT " + Cookies.get("accessToken")
+      }
+    })
+    .then((res) => {
+      console.log(res.data.data)
+      setReviews(res.data.data);
+    });
   }, []);
 
   useEffect(() => {
     fetchHandler();
   }, [fetchHandler, fetchAgain]);
 
-  const editHandler = () => {
-    setShowDetails(true);
-  };
+  const editHandler = (review) => {
+    setShowDetails(review)
+  }
 
-  const showReplyHandler = () => {
-    setShowReply(true);
-  };
+  const showReplyHandler = (review) => {
+    setShowReply(review)
+  }
 
   const replyBackHandler = () => {
     setShowReply(false);
   };
+  console.log(reviews)
 
   return (
     <div className="pt-[82px] px-20" ref={pageRef}>
-      {del && (
-        <DeletePerson onConfrim={confrimHandler} onBack={deleteBackHandler} />
+       {del && (
+        <DeletePerson
+          onConfrim={confrimHandler}
+          onBack={deleteBackHandler}
+        />
       )}
-      {showDetails && <EditRev id={revId} onBack={editBackHandler} />}
-      {showReply && <ReplyRevForm id={revId} onBack={replyBackHandler} />}
+       {showDetails && (
+        <ReviewForm
+          method={"edit"} 
+          reviewEdit={showDetails}
+          consultation={showDetails.consultation}
+          goBackHandler={editBackHandler}
+        />
+      )}
+       {showReply && (
+        <ReplyRevForm
+          reviewReply={showReply}
+          onBack={replyBackHandler}
+        />
+      )}
       <p className="text-[40px] font-[Caprasimo] text-[var(--gray-color)]">
         Counseling reviews :
       </p>
       <table className="mt-16 mb-10">
-        <thead>
+      <thead>
           <tr>
             <th>Specialization</th>
             <th>Doctor</th>
-            <th>Review requester</th>
+            <th>Requester</th>
             <th>Review reason</th>
             <th>status</th>
+            <th>Date created</th>
             <th>procedures</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+        {reviews.data?.map((review, index) => {
+            return (
+              <TrReview
+                key={index}
+                review={review}
+                onEdit={editHandler}
+                onReply={showReplyHandler}
+                onDelete={deleteHandler}
+              />
+            );
+          })}
+          {/* <tr>
             <td>osama</td>
             <td>osama</td>
             <td>mohamad</td>
@@ -230,8 +237,8 @@ const ConReview = () => {
                 <img className="w-6 cursor-pointer" src={details} alt="" />
               </div>
             </td>
-          </tr>
-          <tr>
+          </tr> */}
+          {/* <tr>
             <td>total</td>
             <td>total</td>
             <td>total</td>
@@ -468,7 +475,7 @@ const ConReview = () => {
                 <img className="w-6 cursor-pointer" src={details} alt="" />
               </div>
             </td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
       <div className="flex justify-end items-center mb-8 ">

@@ -61,7 +61,7 @@ const CodeVerification = () => {
   return (
     <div>
       <div
-        className='register text-[var(--p-color)] relative flex items-center bg-[url("/src/global/images/stethoscope-doctors-desk-medical-concept-corona-virus-covid-19-stethoscope-eyeglasses-face-mask-blue-desk-protection-against-virus-coronavirus-flu-colds-diseases-flat-lay-top-view.jpg")]
+        className='register text-[var(--p-color)] relative flex items-center bg-[url("/src/global/images/stethososcope-doctors.jpg")]
           w-[100%] h-[100vh] bg-no-repeat bg-cover'
       >
         <div className="z-40 w-[400px] h-[470px] rounded-2xl bg-[#11999e] absolute left-[60%] p-4 shadow-xl">

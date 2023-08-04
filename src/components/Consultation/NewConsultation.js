@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Consultation.css";
 import heart from "../../global/images/heart.png";
 import ophthalmology from "../../global/images/ophthalmology.png";
@@ -11,9 +11,16 @@ import Psychiatry from "../../global/images/antidepressants.png";
 import other from "../../global/images/trust.png";
 import { useState } from "react";
 import ConsultationForm from "./ConsultationForm";
+import { useLocation } from "react-router-dom";
 
 const NewConsultation = () => {
   const [showForm, setShowForm] = useState(false);
+  // const pageRef = useRef(null);
+  // const location = useLocation();
+
+  // useEffect(() => {
+  //   pageRef.current.scrollIntoView({ behavior: 'smooth' });
+  // }, [location]);
 
   const showFormHandler = (department) => {
     setShowForm(department);

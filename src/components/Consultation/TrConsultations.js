@@ -52,11 +52,11 @@ const TrConsultations = ({
                 alt=""
               />
             )}
-            <NavLink to="/Aafia/ConReview/2">
+            <NavLink to={`/Aafia/ConReview/${consultation.id}`}>
               <img
                 className="w-6 cursor-pointer"
                 src={review}
-                //   onClick={() => nav("/Aafia/ConReview/2")}
+                  // onClick={() => nav("/Aafia/ConReview/2")}
                 alt=""
               />
             </NavLink>
