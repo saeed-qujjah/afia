@@ -3,6 +3,7 @@ const AUTH_URL = `${BASE_URL}/auth`;
 const PROFILE_URL = `${BASE_URL}/profile`;
 const CONSULTATIONS_URL = `${BASE_URL}/consultation`;
 const ADVICE_URL = `${BASE_URL}/advice`;
+const POST_URL = `${BASE_URL}/post`;
 
 export const API = {
   auth: {
@@ -30,5 +31,8 @@ export const API = {
   advice: {
     ADVICE: `${ADVICE_URL}/advices/`
   },
-  
+  social: {
+    POSTS: `${POST_URL}/posts/`,
+    COMMENTS: `${POST_URL}/comments/`
+  }
 };

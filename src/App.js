@@ -20,12 +20,25 @@ import UseAxiosGet from "./hooks/useAxiosGet";
 import { useDispatch } from "react-redux";
 import { authAction } from "./store/auth";
 
+const getLoggedInStatus = () => {
+  const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
+  const token = Cookies.get("accessToken");
+  console.log(token ? true : false);
+  console.log(user ? user?.phone_number && user?.email_verified : false);
+  console.log(user?.email_verified);
+  const isLoggedIn = token
+    ? true
+    : false && (user ? user?.phone_number && user?.email_verified : false);
+  return isLoggedIn;
+};
+
 function App() {
+  const isLoggedIn = getLoggedInStatus();
   const dispatch = useDispatch();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const user = Cookies.get("user")
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const user = Cookies.get("user")
   //  ? JSON.parse(Cookies.get("user")) : null;
-  console.log(user);
+  console.log(isLoggedIn);
   // const isLoggedIn =
   //   !!Cookies.get("accessToken") && !!user?.phone_number && user?.email_verified;
   const { data: specializations } = UseAxiosGet(API.static.GET_SPECIALIZATIONS);
@@ -34,30 +47,37 @@ function App() {
     dispatch(authAction.replaceSpecializations(specializations.data));
   }, [specializations, dispatch]);
 
-  useEffect(() => {
-    if (!Cookies.get("user")) setIsLoggedIn(false);
-    else {
-      const user = JSON.parse(Cookies.get("user"));
-      setIsLoggedIn(
-        !!Cookies.get("accessToken") &&
-          !!user?.phone_number &&
-          user?.email_verified
-      );
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (!Cookies.get("user")) setIsLoggedIn(false);
+  //   else {
+  //     const user = JSON.parse(Cookies.get("user"));
+  //     setIsLoggedIn(
+  //       !!Cookies.get("accessToken") &&
+  //         !!user?.phone_number &&
+  //         user?.email_verified
+  //     );
+  //   }
+  // }, [user]);
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<RedirectPage />}></Route>
-        <Route path="/AboutUs" element={<AboutUs />}></Route>
-        <Route path="/Login" element={<Login />}></Route>
-        <Route path="/Register" element={<Register />}></Route>
-        <Route path="/CodeVerification" element={<CodeVerification />}></Route>
-        <Route
-          path="/CompleteProfileInfo"
-          element={<CompleteProfileInfo />}
-        ></Route>
+        {!isLoggedIn && <Route path="/" element={<RedirectPage />}></Route>}
+        {!isLoggedIn && <Route path="/AboutUs" element={<AboutUs />}></Route>}
+        {!isLoggedIn && <Route path="/Login" element={<Login />}></Route>}
+        {!isLoggedIn && <Route path="/Register" element={<Register />}></Route>}
+        {!isLoggedIn && (
+          <Route
+            path="/CodeVerification"
+            element={<CodeVerification />}
+          ></Route>
+        )}
+        {!isLoggedIn && (
+          <Route
+            path="/CompleteProfileInfo"
+            element={<CompleteProfileInfo />}
+          ></Route>
+        )}
         {isLoggedIn && (
           <Route path="/Aafia" element={<Aafia />}>
             <Route path="Home" element={<Home />}></Route>
