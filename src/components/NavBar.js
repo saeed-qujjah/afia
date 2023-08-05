@@ -17,6 +17,7 @@ const NavBar = ({ page }) => {
   const dispatch = useDispatch()
   const [pageActive, setPageActive] = useState("");
   const [showSetting,setShowSetting] = useState(false);
+  const isDoctor = !!Cookies.get("user") ? JSON.parse(Cookies.get("user")).role === 0 : false 
 
   const showSettingHandler = () => {
     setShowSetting(!showSetting)
@@ -197,7 +198,7 @@ const NavBar = ({ page }) => {
                   Appointment
                 </NavLink>
               </li>
-              <li>
+            {!isDoctor &&  <li>
                 <NavLink
                   to="/Aafia/Advices"
                   className={pageActive === "Advices" ? "active" : "unactive"}
@@ -205,7 +206,7 @@ const NavBar = ({ page }) => {
                 >
                   Medical Advices
                 </NavLink>
-              </li>
+              </li>}
             </ul>
             <div className="w-[14px] h-[14px] rounded-full bg-[var(--gray-color)] text-[10px] flex justify-center items-center text-[var(--p-color)] absolute z-10 top-[-3px] right-[56px]">
               2

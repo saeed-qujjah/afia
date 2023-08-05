@@ -2,8 +2,9 @@ import React from "react";
 import details from "../../global/images/responsability.png";
 import deletes from "../../global/images/delete.png";
 import edit from "../../global/images/edit.png";
+import { NavLink } from "react-router-dom";
 
-const TrReview = ({ review, onDelete, onReply, onEdit }) => {
+const TrReview = ({ review, onDelete, onReply, onEdit ,isDoctor}) => {
   const createDate = new Date(review.created_at);
   const ReviewDate = `${createDate.getFullYear()}-${
     createDate.getMonth() + 1
@@ -11,17 +12,19 @@ const TrReview = ({ review, onDelete, onReply, onEdit }) => {
 
   return (
     <tr>
-      <td>{review.consultation.doctor.specialization.name}</td>
-      <td>
+      {!isDoctor && <td>{review.consultation.doctor.specialization.name}</td>}
+      {!isDoctor && <td>
         {review.consultation.doctor.first_name}{" "}
         {review.consultation.doctor.last_name}
-      </td>
-      <td>{review.requester === 1 ? "Patient" : "Doctor"}</td>
+      </td>}
+      <td>{review.additional_explanation}</td>
+      {isDoctor && <td>{review.consultation.patient.first_name}{" "}
+        {review.consultation.patient.last_name}</td>}
       <td>{review.review_reasons}</td>
       <td>{review.done ? "Done" : "Pending"}</td>
       <td>{ReviewDate}</td>
       <td>
-        <div className="flex justify-between items-center w-[50%] m-auto">
+        {!isDoctor && <div className="flex justify-between items-center w-[50%] m-auto">
           <img
             className="w-6 cursor-pointer"
             src={deletes}
@@ -44,7 +47,19 @@ const TrReview = ({ review, onDelete, onReply, onEdit }) => {
               alt=""
             />
           )}
-        </div>
+        </div>}
+        {isDoctor && (
+          <div className="flex justify-center items-center w-[50%] m-auto">
+            <NavLink to={`/Aafia/RevRepley/${review.id}`}>
+              <img
+                className="w-6 cursor-pointer"
+                src={review.done ? edit : details}
+                // onClick={() => nav("/Aafia/ConReview/2")}
+                alt=""
+              />
+            </NavLink>
+          </div>
+        )}
       </td>
     </tr>
   );

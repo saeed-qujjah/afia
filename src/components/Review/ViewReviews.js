@@ -21,6 +21,9 @@ const ViewReviews = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [showReply, setShowReply] = useState(false);
   const [fetchAgain, setFetchAgain] = useState(false);
+  const isDoctor = !!Cookies.get("user")
+    ? JSON.parse(Cookies.get("user")).role === 0
+    : false;
 
   const deleteHandler = (id) => {
     setRevId(id);
@@ -129,13 +132,14 @@ const ViewReviews = () => {
       <table className="my-16">
         <thead>
           <tr>
-            <th>Specialization</th>
-            <th>Doctor</th>
-            <th>Requester</th>
+          {!isDoctor && <th>Specialization</th>}
+            {!isDoctor && <th>Doctor</th>}
+            {isDoctor && <th>Patient</th>}
             <th>Review reason</th>
-            <th>status</th>
+            <th>Explanation</th>
+            <th>Status</th>
             <th>Date created</th>
-            <th>procedures</th>
+            <th>Procedures</th>
           </tr>
         </thead>
         <tbody>
@@ -144,6 +148,7 @@ const ViewReviews = () => {
               <TrReview
                 key={index}
                 review={review}
+                isDoctor={isDoctor}
                 onEdit={editHandler}
                 onReply={showReplyHandler}
                 onDelete={deleteHandler}

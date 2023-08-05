@@ -16,6 +16,9 @@ const ViewConsultation = () => {
   const [showReply, setShowReply] = useState(false);
   const [fetchAgain, setFetchAgain] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const isDoctor = !!Cookies.get("user")
+    ? JSON.parse(Cookies.get("user")).role === 0
+    : false;
 
   const deleteHandler = (id, isPending) => {
     setConId(id);
@@ -112,20 +115,21 @@ const ViewConsultation = () => {
           </p>
         </div>
         <div className="w-[32%]">
-          <p className="text-[var(--greenLigth-color)]">
+        {!isDoctor && <p className="text-[var(--greenLigth-color)]">
             Consultations that need review:
-          </p>
-          <p className="text-[var(--gray-color)] text-3xl mt-2">
+          </p>}
+         {!isDoctor && <p className="text-[var(--gray-color)] text-3xl mt-2">
             {consultations.have_pending_review_count}
             <span className="text-sm ml-4">consultations</span>
-          </p>
+          </p>}
         </div>
       </div>
       <table className="my-16">
         <thead>
           <tr>
-            <th>Specialization</th>
-            <th>Doctor</th>
+            {!isDoctor && <th>Specialization</th>}
+            {!isDoctor && <th>Doctor</th>}
+            {isDoctor && <th>Patient</th>}
             <th>Symptoms</th>
             <th>explanation</th>
             <th>status</th>
@@ -138,6 +142,7 @@ const ViewConsultation = () => {
             return (
               <TrConsultations
                 key={index}
+                isDoctor ={isDoctor}
                 consultation={consultation}
                 onEdit={editHandler}
                 onReply={showReplyHandler}

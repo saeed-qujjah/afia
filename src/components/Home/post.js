@@ -49,7 +49,7 @@ const Post = ({ post, comments }) => {
   };
 
   return (
-    <div className="bg-white shadow-sm text-[var(--gray-color)] mt-4 rounded-lg">
+    <div className="bg-white shadow-md text-[var(--gray-color)] mt-4 rounded-lg">
       <div className="w-[100%]">
         <div className="tablet:px-[20px] px-[20px] py-[20px] w-[100%] ">
           <div className="flex items-center justify-between mb-5 text-[var(--gray-color)]">

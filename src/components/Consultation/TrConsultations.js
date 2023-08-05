@@ -11,7 +11,8 @@ const TrConsultations = ({
   onReply,
   onEdit,
   forReviews,
-  onAddReview
+  onAddReview,
+  isDoctor
 }) => {
   const createDate = new Date(consultation.created_at);
   const consultationDate = `${createDate.getFullYear()}-${
@@ -19,16 +20,23 @@ const TrConsultations = ({
   }-${createDate.getDate()}`;
   return (
     <tr>
-      <td>{consultation.doctor.specialization.name}</td>
-      <td>
-        {consultation.doctor.first_name} {consultation.doctor.last_name}
-      </td>
+      {!isDoctor && <td>{consultation.doctor.specialization.name}</td>}
+      {!isDoctor && (
+        <td>
+          {`${consultation.doctor.first_name} ${consultation.doctor.last_name}`}
+        </td>
+      )}
+      {isDoctor && (
+        <td>
+          {consultation.patient.first_name} {consultation.patient.last_name}
+        </td>
+      )}
       <td>{consultation.symptoms}</td>
       <td>{consultation.additional_explanation}</td>
       <td>{consultation.done ? "Done" : "Pending"}</td>
       <td>{consultationDate}</td>
       <td>
-        {!forReviews && (
+        {!forReviews && !isDoctor && (
           <div className="flex justify-between items-center w-[60%] m-auto">
             <img
               className="w-6 cursor-pointer"
@@ -56,7 +64,7 @@ const TrConsultations = ({
               <img
                 className="w-6 cursor-pointer"
                 src={review}
-                  // onClick={() => nav("/Aafia/ConReview/2")}
+                // onClick={() => nav("/Aafia/ConReview/2")}
                 alt=""
               />
             </NavLink>
@@ -73,6 +81,18 @@ const TrConsultations = ({
               alt="Add Review"
               onClick={() => onAddReview(consultation)}
             />
+          </div>
+        )}
+        {isDoctor && (
+          <div className="flex justify-center items-center w-[50%] m-auto">
+            <NavLink to={`/Aafia/ConRepley/${consultation.id}`}>
+              <img
+                className="w-6 cursor-pointer"
+                src={consultation.done ? edit : details}
+                // onClick={() => nav("/Aafia/ConReview/2")}
+                alt=""
+              />
+            </NavLink>
           </div>
         )}
       </td>

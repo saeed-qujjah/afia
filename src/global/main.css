@@ -236,7 +236,7 @@ select.error,
 input.error {
   border-color: brown !important;
 }
-.child input {
+.child input, .child textarea {
   height: 45px;
   background-color: transparent;
   border-radius: 7px;
@@ -247,7 +247,7 @@ input.error {
   opacity: 90%;
   font-size: 15px;
 }
-input:focus {
+input:focus,textarea:focus {
   outline: none;
 }
 .child label {
@@ -299,10 +299,11 @@ input:focus {
 }
 .imgcontent .place-left {
   position: absolute;
-  width: 100px;
+  width: 390px;
+  cursor: pointer;
   top: 59px;
   left: 5px;
-  height: 100px;
+  height: 150px;
 }
 .imgcontent .place-left img{
   width: 100%;

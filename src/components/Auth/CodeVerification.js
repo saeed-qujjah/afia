@@ -13,7 +13,7 @@ const CodeVerification = () => {
   const [code, setCode] = useState("");
   const nav = useNavigate();
   const email = JSON.parse(Cookies.get("user")).email;
-  console.log(email);
+
 
   const submitHandler = (e) => {
     e.preventDefault();
