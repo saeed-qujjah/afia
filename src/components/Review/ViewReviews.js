@@ -24,6 +24,7 @@ const ViewReviews = () => {
   const isDoctor = !!Cookies.get("user")
     ? JSON.parse(Cookies.get("user")).role === 0
     : false;
+    console.log(reviews)
 
   const deleteHandler = (id) => {
     setRevId(id);

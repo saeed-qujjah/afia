@@ -72,7 +72,7 @@ const ReplyRevForm = ({onBack,reviewReply}) => {
                   className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                   type="text"
                   readOnly
-                  // value={}
+                  value={reviewReply.need_review_at ? reviewReply.need_review_at : "No need to review"}
                 />
                 <label className="top-top">Review time</label>
               </div>

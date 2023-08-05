@@ -64,11 +64,16 @@ const ConsultationForm = ({
       (array) =>
         `${array.first_name} ${array.last_name}` === consultation.doctor_id
     );
-    if (!doctorId) {
+    console.log(doctorId.length)
+    if (doctorId.length === 0) {
       swal({
         icon: "warning",
         timer: 2100,
         title: "The Doctor Not Found"
+      });
+      doctorId = "";
+      setConsultation((prev) => {
+        return { ...prev, doctor_id: "" };
       });
     } else doctorId = doctorId[0].id;
     const formData = new FormData();
@@ -170,6 +175,7 @@ const ConsultationForm = ({
                 value={consultation.doctor_id}
                 onChange={changeHandler}
                 list="doctor"
+                required
               />
               <label className="top-top">Doctor *</label>
               <datalist id="doctor">
@@ -188,6 +194,7 @@ const ConsultationForm = ({
               name="symptoms"
               value={consultation.symptoms}
               onChange={changeHandler}
+              required
             />
             <label className="top-top">Symptoms *</label>
           </div>
@@ -267,7 +274,9 @@ const ConsultationForm = ({
             <div className="w-[31%] flex justify-between items-center mb-8 mt-5">
               <button
                 type="submit"
-                className={`${method === "edit" ? "w-[105px]" : "" } py-[9px] text-[var(--p-color)] px-[30px] font-bold bg-[var(--gray-color)] cursor-pointer shadow-lg rounded-lg`}
+                className={`${
+                  method === "edit" ? "w-[105px]" : ""
+                } py-[9px] text-[var(--p-color)] px-[30px] font-bold bg-[var(--gray-color)] cursor-pointer shadow-lg rounded-lg`}
               >
                 {method === "edit" ? "Edit" : "Submit"}
               </button>

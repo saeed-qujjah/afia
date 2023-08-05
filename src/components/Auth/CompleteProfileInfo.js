@@ -214,6 +214,7 @@ const CompleteProfileInfo = () => {
               <div className="child">
                 <DatePicker
                   className="subchild"
+                  dateFormat="yyyy/MM/dd"
                   name="birth_date"
                   isClearable
                   selected={completeData.birth_date}

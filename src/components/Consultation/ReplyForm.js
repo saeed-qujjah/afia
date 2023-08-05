@@ -40,7 +40,30 @@ const ReplyForm = ({onBack,consultationReply}) => {
             />
             <label className="top-top">Symptoms</label>
           </div>
-          <div className="child w-[100%] relative mb-5">
+          <div className="w-[100%] relative flex justify-between items-center">
+            <div className="child w-[100%] relative mb-5">
+              <textarea
+                className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
+                type="text"
+                style={{ height: "150px", width: "97%", padding: "12px" }}
+                readOnly
+                value={consultationReply.diagnosis}
+              />
+              <label className="top-top">Diagnosis</label>
+            </div>
+            <div className="child w-[100%] relative mb-5">
+              <textarea
+                className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
+                type="text"
+                name="prescription"
+                style={{ height: "150px", width: "100%", padding: "12px" }}
+                readOnly
+                value={consultationReply.prescription}
+              />
+              <label className="top-top">Prescription</label>
+            </div>
+          </div>
+          {/* <div className="child w-[100%] relative mb-5">
             <input
               className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
               type="text"
@@ -57,25 +80,25 @@ const ReplyForm = ({onBack,consultationReply}) => {
               value={consultationReply.prescription}
             />
             <label className="top-top">Prescription</label>
-          </div>
+          </div> */}
           <div className="w-[100%] relative flex justify-between items-center">
             <div className="child">
               <input
-                className=" border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
+                className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                 type="text"
                 readOnly
                 value={consultationReply.treatment_duration}
               />
               <label className="top-top">Treatment time</label>
             </div>
-            {/* <div className="child">
+            <div className="child">
               <input
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                 type="text"
-                // placeholder="Last Name"
+                value={consultationReply.need_review_at ? consultationReply.need_review_at : "No need to review"}
               />
               <label className="top-top">Review time</label>
-            </div> */}
+            </div>
           </div>
           {/* <div className="flex justify-between items-center w-[54%] mb-4">
             <div>

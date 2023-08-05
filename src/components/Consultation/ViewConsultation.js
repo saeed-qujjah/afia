@@ -87,7 +87,6 @@ const ViewConsultation = () => {
   const replyBackHandler = () => {
     setShowReply(false);
   };
-
   return (
     <div className="py-20 px-20">
       {del && (
@@ -119,7 +118,7 @@ const ViewConsultation = () => {
             Consultations that need review:
           </p>}
          {!isDoctor && <p className="text-[var(--gray-color)] text-3xl mt-2">
-            {consultations.have_pending_review_count}
+            {consultations.need_review_count}
             <span className="text-sm ml-4">consultations</span>
           </p>}
         </div>

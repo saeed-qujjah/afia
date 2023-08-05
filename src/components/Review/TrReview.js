@@ -17,10 +17,10 @@ const TrReview = ({ review, onDelete, onReply, onEdit ,isDoctor}) => {
         {review.consultation.doctor.first_name}{" "}
         {review.consultation.doctor.last_name}
       </td>}
-      <td>{review.additional_explanation}</td>
       {isDoctor && <td>{review.consultation.patient.first_name}{" "}
         {review.consultation.patient.last_name}</td>}
       <td>{review.review_reasons}</td>
+      <td>{review.additional_explanation}</td>
       <td>{review.done ? "Done" : "Pending"}</td>
       <td>{ReviewDate}</td>
       <td>

@@ -19,6 +19,7 @@ import UseAxiosGet from "./hooks/useAxiosGet";
 import { useDispatch, useSelector } from "react-redux";
 import { authAction } from "./store/auth";
 import ConRepley from "./components/Consultation/ConRepley";
+import RevRepley from "./components/Review/RevRepley";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLogged);
@@ -56,6 +57,7 @@ function App() {
             <Route path="Consultation" element={<Consultation />}></Route>
             <Route path="ConReview/:id" element={<ConReview />}></Route>
             <Route path="ConRepley/:id" element={<ConRepley />}></Route>
+            <Route path="RevRepley/:id" element={<RevRepley />}></Route>
             <Route path="Review" element={<Review />}></Route>
             <Route path="Dating" element={<Dating />}></Route>
             <Route path="Advices" element={<Advices />}></Route>

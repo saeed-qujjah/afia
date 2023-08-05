@@ -20,7 +20,8 @@ const ConRepley = () => {
   const [repley, setRepley] = useState({
     diagnosis: "",
     prescription: "",
-    treatment_duration: ""
+    treatment_duration: "",
+    need_review_at: null
   });
   const bloodType = {
     0: "O+",
@@ -36,7 +37,7 @@ const ConRepley = () => {
   const location = useLocation();
 
   useEffect(() => {
-    pageRef.current.scrollIntoView({ behavior: 'smooth' });
+    pageRef.current.scrollIntoView({ behavior: "smooth" });
   }, [location]);
 
   useEffect(() => {
@@ -52,6 +53,9 @@ const ConRepley = () => {
           : "",
         treatment_duration: consultationReply?.data.treatment_duration
           ? consultationReply.data.treatment_duration
+          : "",
+        need_review_at: consultationReply?.data.need_review_at
+          ? new Date(consultationReply.data.need_review_at)
           : ""
       };
     });
@@ -66,12 +70,26 @@ const ConRepley = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const reviewDate = repley.need_review_at
+      ? `${repley.need_review_at.getFullYear()}-${
+          repley.need_review_at.getMonth() + 1
+        }-${repley.need_review_at.getDate()}`
+      : null;
     axios
-      .put(`${API.consultations.CONSULTATIONS}${param.id}/`, repley, {
-        headers: {
-          Authorization: "JWT " + Cookies.get("accessToken")
+      .put(
+        `${API.consultations.CONSULTATIONS}${param.id}/`,
+        {
+          diagnosis: repley.diagnosis,
+          prescription: repley.prescription,
+          treatment_duration: repley.treatment_duration,
+          need_review_at: reviewDate
+        },
+        {
+          headers: {
+            Authorization: "JWT " + Cookies.get("accessToken")
+          }
         }
-      })
+      )
       .then((res) => {
         console.log(res.data);
         swal({
@@ -263,6 +281,7 @@ const ConRepley = () => {
                 style={{ height: "150px", width: "97%", padding: "12px" }}
                 name="diagnosis"
                 value={repley.diagnosis}
+                required
                 onChange={changeHandler}
               />
               <label className="top-top">Diagnosis *</label>
@@ -274,6 +293,7 @@ const ConRepley = () => {
                 name="prescription"
                 style={{ height: "150px", width: "97%", padding: "12px" }}
                 onChange={changeHandler}
+                required
                 value={repley.prescription}
               />
               <label className="top-top">Prescription *</label>
@@ -286,21 +306,23 @@ const ConRepley = () => {
                 type="text"
                 name="treatment_duration"
                 value={repley.treatment_duration}
+                required
                 onChange={changeHandler}
               />
               <label className="top-top">Treatment time *</label>
             </div>
             <div className="child">
               <DatePicker
-                className="subchild"
-                name="birth_date"
+                // className="subchild"
+                dateFormat="yyyy/MM/dd"
+                name="need_review_at"
                 isClearable
-                selected={null}
-                //   onChange={(e) =>
-                //     setCompleteData((prev) => {
-                //       return { ...prev, birth_date: e };
-                //     })
-                //   }
+                selected={repley.need_review_at}
+                onChange={(e) =>
+                  setRepley((prev) => {
+                    return { ...prev, need_review_at: e };
+                  })
+                }
               />
               <label className="top-top">Review time</label>
             </div>

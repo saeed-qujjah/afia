@@ -120,11 +120,11 @@ const ConReview = () => {
           <tr>
             <th>Specialization</th>
             <th>Doctor</th>
-            <th>Requester</th>
             <th>Review reason</th>
-            <th>status</th>
+            <th>Explanation</th>
+            <th>Status</th>
             <th>Date created</th>
-            <th>procedures</th>
+            <th>Procedures</th>
           </tr>
         </thead>
         <tbody>
