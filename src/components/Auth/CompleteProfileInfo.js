@@ -11,9 +11,9 @@ import axios from "axios";
 import { authAction } from "../../store/auth";
 
 const CompleteProfileInfo = () => {
-  const user = JSON.parse(Cookies.get("user"));
+  const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")): null;
   const dispatch = useDispatch();
-  const isDoctor = user.role === 1 ? false : true;
+  const isDoctor = user?.role === 1 ? false : true;
   const nav = useNavigate();
   const [country, setCountry] = useState("");
   const [imageLicense, setImageLicense] = useState("");
