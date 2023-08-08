@@ -65,9 +65,10 @@ const Consultation = () => {
     //   {newActive ? <NewConsultation /> : <ViewConsultation />}
     // </div>
     <div className="consoltation pt-[62px]" ref={pageRef}>
+      <div className="absolute top-0 left-0 w-[100%] h-[643px] bg-black z-20 opacity-[0.1]"></div>
       <div className="relative">
         <img src={img} alt="" className="h-[581px] w-[100%] object-cover" />
-        <p className="absolute top-[50%] left-20 font-[Caprasimo] text-4xl w-[500px] text-[var(--p-color)]">
+        <p className="absolute top-[50%] left-20 z-30 font-[Caprasimo] text-4xl w-[500px] text-[var(--p-color)]">
           {!isDoctor
             ? "Experience the Future of Healthcare Online Consultations with Expert Doctors"
             : "Seamlessly conduct remote consultations with patients through our user-friendly interface"}

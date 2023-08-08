@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authAction } from "./store/auth";
 import ConRepley from "./components/Consultation/ConRepley";
 import RevRepley from "./components/Review/RevRepley";
+import DoctorsAppointment from "./components/Dating/DoctorsAppointment";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLogged);
@@ -51,18 +52,19 @@ function App() {
             element={<CompleteProfileInfo />}
           ></Route>
         )}
-        {isLoggedIn && (
+        {/* {isLoggedIn && ( */}
           <Route path="/Aafia" element={<Aafia />}>
             <Route path="Home" element={<Home />}></Route>
             <Route path="Consultation" element={<Consultation />}></Route>
             <Route path="ConReview/:id" element={<ConReview />}></Route>
             <Route path="ConRepley/:id" element={<ConRepley />}></Route>
             <Route path="RevRepley/:id" element={<RevRepley />}></Route>
+            <Route path="DoctorsAppointment/:id" element={<DoctorsAppointment />}></Route>
             <Route path="Review" element={<Review />}></Route>
-            <Route path="Dating" element={<Dating />}></Route>
+            <Route path="Appointment" element={<Dating />}></Route>
             <Route path="Advices" element={<Advices />}></Route>
           </Route>
-        )}
+        {/* )} */}
       </Routes>
     </div>
   );

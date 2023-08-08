@@ -191,7 +191,7 @@ const NavBar = ({ page }) => {
               </li>
               <li>
                 <NavLink
-                  to="/Aafia/Dating"
+                  to="/Aafia/Appointment"
                   className={pageActive === "Dating" ? "active" : "unactive"}
                   onClick={() => setPageActive("Dating")}
                 >

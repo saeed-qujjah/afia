@@ -19,9 +19,10 @@ const Review = () => {
   }, [location]);
   return (
     <div className="review pt-[62px]" ref={pageRef}>  
+    <div className="absolute top-0 left-0 w-[100%] h-[362px] bg-black z-20 opacity-[0.2]"></div>
         <div className="relative">
         <img src={img} alt="" className="h-[300px] w-[100%] object-cover" />
-        <p className="absolute top-[50%] left-20 font-[Caprasimo] text-4xl w-[700px] text-[var(--p-color)]">
+        <p className="absolute top-[50%] left-20 font-[Caprasimo] z-30 text-4xl w-[700px] text-[var(--p-color)]">
        {isDoctor ? "Responding to reviews allows you to showcase your dedication to patients satisfaction" : "You can review the doctor who gave you the previous consultation at any time"}
         </p>
       </div>
