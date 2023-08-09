@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../global/images/Green Medical Logo.png";
-import logo2 from "../global/images/aafia.png";
+import logo2 from "../global/images/afia.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import consul from "../global/images/talk.png";
 import advice from "../global/images/hands-holding-heart.png";
@@ -138,7 +138,7 @@ const NavBar = ({ page }) => {
       </div> */}
       <div className="navbar flex justify-between fixed w-[100%] items-center px-20 py-2 bg-[var(--p-color)] z-50 shadow-md">
         <div className="flex justify-between items-center">
-          <img className="w-28" src={logo2} alt="" />
+          <img className="w-24" src={logo2} alt="" />
         </div>
         {page === "about" && (
           <div className="flex justify-between items-center">
@@ -226,7 +226,7 @@ const NavBar = ({ page }) => {
                 color="var(--gray-color)"
               ></box-icon>
             { showSetting && <ul className="absolute w-[180px] text-[var(--gray-color)] bg-[var(--greenLigth-color)] pl-4 py-3 top-10 right-[-70px] rounded-xl">
-                <li className="mb-2">Change password</li>
+                <li className="mb-2" onClick={()=>nav("/Change_password")}>Change password</li>
                 <hr className='w-[90%] my-3 rounded-full border-[var(--green-color)]'></hr>
                 <li onClick={logoutHandler} className="flex justify-between items-center w-[85px]"><box-icon name='log-out' color='var(--gray-color)'></box-icon>Logout</li>
               </ul>}

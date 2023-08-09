@@ -21,6 +21,7 @@ import { authAction } from "./store/auth";
 import ConRepley from "./components/Consultation/ConRepley";
 import RevRepley from "./components/Review/RevRepley";
 import DoctorsAppointment from "./components/Dating/DoctorsAppointment";
+import ChangePassword from "./components/Auth/ChangePassword";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLogged);
@@ -52,6 +53,7 @@ function App() {
             element={<CompleteProfileInfo />}
           ></Route>
         )}
+        <Route path="/Change_password" element={<ChangePassword />}></Route>
         {/* {isLoggedIn && ( */}
           <Route path="/Aafia" element={<Aafia />}>
             <Route path="Home" element={<Home />}></Route>

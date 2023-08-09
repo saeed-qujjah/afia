@@ -1,5 +1,5 @@
 import React from "react";
-import ophthalmology from "../../global/images/ophthalmology.png";
+import ophthalmology from "../../global/images/eyes.png";
 import gastroenterology from "../../global/images/stomach.png";
 import neurology from "../../global/images/neuron.png";
 import gynecology from "../../global/images/abortion.png";

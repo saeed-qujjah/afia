@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "boxicons";
 import img from "../../global/images/bearded-doctor-glasses(1).jpg";
 import img2 from "../../global/images/girl.jpg";
@@ -17,6 +17,7 @@ const DoctorsAppointment = () => {
   useEffect(() => {
     pageRef.current.scrollIntoView({ behavior: "smooth" });
   }, [location]);
+  const nav = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const data = [
     "Dr.Osama Horani",
@@ -41,7 +42,7 @@ const DoctorsAppointment = () => {
   //   const hospitals = ["Mujtahid","Ibn al-Nafis","Tishreen","Mouwasat","Al-Shami","Al-Zahra","Al-Razi"]
   //   const hospital = hospitals[Math.floor(Math.random() * hospitals.length)];
   const goBackHandler = () => {
-    console.log("ddd")
+    console.log("ddd");
     setShowForm(false);
   };
 
@@ -53,7 +54,7 @@ const DoctorsAppointment = () => {
           specialization={param.id}
           doctor={showForm}
         />
-      )}    
+      )}
       <div className="flex mx-20 mt-6 mb-20 justify-between items-center text-[var(--gray-color)]">
         {/* <img src={celender} alt="" className="w-24" />  */}
         <div className="flex font-[Caprasimo] justify-between items-center w-[48%]">
@@ -251,7 +252,24 @@ const DoctorsAppointment = () => {
             </p>
           </div>
         </div> */}
+        
       </div>
+      <div className="flex justify-end items-center mx-20">
+          <div className="w-[31%] flex justify-end items-center mt-5">
+            {/* <button
+              type="submit"
+              className="py-[9px] text-[var(--p-color)] px-[27px] font-bold bg-[var(--gray-color)] cursor-pointer shadow-lg rounded-lg"
+            >
+              Submit
+            </button> */}
+            <button
+              onClick={() => nav("/Aafia/Appointment")}
+              className="border border-[var(--gray-color)] px-[30px] py-[8px] outline-none cursor-pointer font-bold rounded-lg text-[var(--gray-color)] "
+            >
+              Back
+            </button>
+          </div>
+        </div>
     </div>
   );
 };
