@@ -12,7 +12,7 @@ export const API = {
     VERIFICATION_CODE: `${AUTH_URL}/send-verification-code/`,
     VERIFY: `${AUTH_URL}/verify/`,
     CHANGE_PASSWORD: `${AUTH_URL}/change-password/`,
-    CHANGE_EMAIL: `${AUTH_URL}/change-email/`
+    CHANGE_EMAIL: `${AUTH_URL}/change-email/`,
   },
   profile: {
     DOCTOR_PROFILE: `${PROFILE_URL}/doctor-profiles/me/`,

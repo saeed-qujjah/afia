@@ -145,7 +145,7 @@ const Login = () => {
                 ></box-icon>
               )}
             </div>
-            <p className="text-center mt-3 cursor-pointer">Forget Password ?</p>
+            <p className="text-center mt-3 cursor-pointer" onClick={()=>{nav("/ForgotPassword")}}>Forgot Password ?</p>
             <button
               type="submit"
               className="text-slate-200 py-[10px] px-[35px] mx-auto my-[30px] font-bold bg-[#40514E] cursor-pointer shadow-lg rounded-lg"

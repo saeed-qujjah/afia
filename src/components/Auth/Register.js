@@ -146,7 +146,7 @@ const Register = () => {
             <div className="w-[100%] relative mb-5">
               <input
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 onChange={changeHandler}
                 value={userDataRegister.password}
@@ -187,7 +187,7 @@ const Register = () => {
             <div className="w-[100%] relative mb-5">
               <input
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
-                type="password"
+                type={showCPassword ? "text" : "password"}
                 name="confirmPass"
                 value={confirmPass}
                 onChange={(e) => setConfirmPass(e.target.value)}
