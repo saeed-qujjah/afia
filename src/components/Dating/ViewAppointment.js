@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import DeletePerson from "../../global/DeletePerson";
-import EditCon from "./EditCon";
+// import EditCon from "./EditCon";
 import Cookies from "js-cookie";
 import ReplyForm from "./ReplyForm";
 import { API } from "../../data/config";
-import TrConsultations from "./TrConsultations";
-import ConsultationForm from "./ConsultationForm";
+import TrAppointment from "./TrAppointment";
+// import ConsultationForm from "./ConsultationForm";
 
-const ViewConsultation = () => {
+const ViewAppointment = () => {
   const [del, setDel] = useState();
   const [conId, setConId] = useState("");
   const [consultations, setConsultations] = useState([]);
@@ -92,35 +92,41 @@ const ViewConsultation = () => {
       {del && (
         <DeletePerson onConfrim={confrimHandler} onBack={deleteBackHandler} />
       )}
-      {showDetails && (
+      {/* {showDetails && (
         <ConsultationForm consultationEdit={showDetails} specialization={showDetails.doctor.specialization.name} method={"edit"} goBackHandler={editBackHandler} />
+      )} */}
+      {showReply && (
+        <ReplyForm consultationReply={showReply} onBack={replyBackHandler} />
       )}
-      {showReply && <ReplyForm consultationReply={showReply} onBack={replyBackHandler} />}
       <div className="flex justify-between items-center">
         <div className="w-[32%]">
-          <p className="text-[var(--greenLigth-color)]">Total consultations:</p>
+          <p className="text-[var(--greenLigth-color)]">Total Appointments:</p>
           <p className="text-[var(--gray-color)] text-3xl mt-2">
-            {consultations.count}
-            <span className="text-sm ml-4">consultations</span>
+            {consultations.count}5
+            <span className="text-sm ml-4">Appointments</span>
           </p>
         </div>
         <div className="w-[32%]">
           <p className="text-[var(--greenLigth-color)]">
-            Pending consultations:
+            Pending Appointments :
           </p>
           <p className="text-[var(--gray-color)] text-3xl mt-2">
-            {consultations.pending_count}
-            <span className="text-sm ml-4">consultations</span>
+            {consultations.pending_count}3
+            <span className="text-sm ml-4">Appointments</span>
           </p>
         </div>
         <div className="w-[32%]">
-        {!isDoctor && <p className="text-[var(--greenLigth-color)]">
-            Consultations that need review:
-          </p>}
-         {!isDoctor && <p className="text-[var(--gray-color)] text-3xl mt-2">
-            {consultations.need_review_count}
-            <span className="text-sm ml-4">consultations</span>
-          </p>}
+          {!isDoctor && (
+            <p className="text-[var(--greenLigth-color)]">
+              Appointments that need review:
+            </p>
+          )}
+          {!isDoctor && (
+            <p className="text-[var(--gray-color)] text-3xl mt-2">
+              {consultations.need_review_count}2
+              <span className="text-sm ml-4">Appointments</span>
+            </p>
+          )}
         </div>
       </div>
       <table className="my-16">
@@ -129,8 +135,8 @@ const ViewConsultation = () => {
             {!isDoctor && <th>Specialization</th>}
             {!isDoctor && <th>Doctor</th>}
             {isDoctor && <th>Patient</th>}
-            <th>Symptoms</th>
-            <th>Explanation</th>
+            <th>Country</th>
+            <th>City</th>
             <th>Status</th>
             <th>Date created</th>
             <th>Procedures</th>
@@ -139,9 +145,9 @@ const ViewConsultation = () => {
         <tbody>
           {consultations.data?.map((consultation, index) => {
             return (
-              <TrConsultations
+              <TrAppointment
                 key={index}
-                isDoctor ={isDoctor}
+                isDoctor={isDoctor}
                 consultation={consultation}
                 onEdit={editHandler}
                 onReply={showReplyHandler}
@@ -366,4 +372,4 @@ const ViewConsultation = () => {
   );
 };
 
-export default ViewConsultation;
+export default ViewAppointment;
