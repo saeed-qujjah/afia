@@ -12,7 +12,7 @@ const CodeVerification = () => {
   // const dispatch = useDispatch();
   const [code, setCode] = useState("");
   const nav = useNavigate();
-  const email = JSON.parse(Cookies.get("user")).email;
+  const email = Cookies.get("user") ? JSON.parse(Cookies.get("user")).email : "" ;
 
 
   const submitHandler = (e) => {
@@ -73,7 +73,7 @@ const CodeVerification = () => {
         className='register text-[var(--p-color)] relative flex items-center bg-[url("/src/global/images/stethososcope-doctors.jpg")]
           w-[100%] h-[100vh] bg-no-repeat bg-cover'
       >
-        <div className="z-40 w-[400px] h-[470px] rounded-2xl bg-[#11999e] absolute left-[60%] p-4 shadow-xl">
+        <div className="z-40 w-[400px] h-[400px] rounded-2xl bg-[#11999e] absolute left-[60%] p-4 shadow-xl">
           <div className="flex justify-center items-center flex-col">
             <h1 className="text-3xl font-bold">Code verification</h1>
             <hr className="mt-2 w-[50%]"></hr>

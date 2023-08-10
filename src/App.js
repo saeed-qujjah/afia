@@ -23,6 +23,7 @@ import RevRepley from "./components/Review/RevRepley";
 import DoctorsAppointment from "./components/Dating/DoctorsAppointment";
 import ChangePassword from "./components/Auth/ChangePassword";
 import ForgotPassword from "./components/Auth/ForgotPassword";
+import ResetPassword from "./components/Auth/ResetPassword";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLogged);
@@ -55,6 +56,7 @@ function App() {
           ></Route>
         )}
         <Route path="/Change_password" element={<ChangePassword />}></Route>
+        <Route path="/Reset_password" element={<ResetPassword />}></Route>
         <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
         {/* {isLoggedIn && ( */}
           <Route path="/Aafia" element={<Aafia />}>

@@ -15,6 +15,7 @@ const ForgotPassword = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         if(!showCodeField) setShowCodField(true)
+        else nav("/Reset_password")
         // axios
         //   .put(API.auth.VERIFY, {
         //     email: email,
@@ -72,7 +73,7 @@ const ForgotPassword = () => {
           className='register text-[var(--p-color)] relative flex items-center bg-[url("/src/global/images/stethososcope-doctors.jpg")]
             w-[100%] h-[100vh] bg-no-repeat bg-cover'
         >
-          <div className="z-40 w-[400px] h-[470px] rounded-2xl bg-[#11999e] absolute left-[60%] p-4 shadow-xl">
+          <div className="z-40 w-[400px] h-[400px] rounded-2xl bg-[#11999e] absolute left-[60%] p-4 shadow-xl">
             <div className="flex justify-center items-center flex-col">
               <h1 className="text-3xl font-bold">{showCodeField ? "Code verification" : "Forgot Password"}</h1>
               <hr className="mt-2 w-[50%]"></hr>
@@ -91,7 +92,7 @@ const ForgotPassword = () => {
                   placeholder="Enter the code"
                 />
               </div>}
-              {!showCodeField && <div className="w-[100%] relative mb-28">
+              {!showCodeField && <div className="w-[100%] relative mb-12">
                 <input
                   className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
                   type="email"

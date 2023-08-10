@@ -77,13 +77,13 @@ const ChangePassword = () => {
         >
           Back
         </button> */}
-        <div className="z-40 w-[400px] h-[470px] rounded-2xl bg-[var(--green-color)] absolute left-[37%] p-4 shadow-xl">
+        <div className="z-40 w-[400px] h-[400px] rounded-2xl bg-[var(--green-color)] absolute left-[37%] p-4 shadow-xl">
           <div className="flex justify-center items-center flex-col">
             <h1 className="text-3xl font-bold">Change Password</h1>
             <hr className="mt-2 mb-14 w-[50%]"></hr>
           </div>
           <form className="flex flex-col w-[100%]" onSubmit={submitHandler}>
-            <div className="w-[100%] relative mb-7">
+            <div className="w-[100%] relative mb-5">
               <input
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
                 type={showOldPass ? "text" : "password"}
@@ -124,7 +124,7 @@ const ChangePassword = () => {
               )}
               {/* <box-icon name='user' color="#16a34a" style={{position:"absolute", top:"25%" , left:"10px"}}></box-icon> */}
             </div>
-            <div className="w-[100%] relative mb-7">
+            <div className="w-[100%] relative mb-5">
               <input
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
                 type={showPassword ? "text" : "password"}
@@ -165,7 +165,7 @@ const ChangePassword = () => {
               )}
               {/* <box-icon name='user' color="#16a34a" style={{position:"absolute", top:"25%" , left:"10px"}}></box-icon> */}
             </div>
-            <div className="w-[100%] relative mb-7">
+            <div className="w-[100%] relative mb-5">
               <input
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
                 type={showCPassword ? "text" : "password"}
