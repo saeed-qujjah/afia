@@ -1,4 +1,4 @@
-const BASE_URL = "http://192.168.1.111:8000/api";
+const BASE_URL = "http://154.62.109.112:8000/api";
 const AUTH_URL = `${BASE_URL}/auth`;
 const PROFILE_URL = `${BASE_URL}/profile`;
 const CONSULTATIONS_URL = `${BASE_URL}/consultation`;
