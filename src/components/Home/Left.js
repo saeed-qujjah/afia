@@ -61,7 +61,7 @@ const Left = () => {
           <div className="flex justify-between items-center pr-6">
             <img src={img2} className="w-[47px] h-[47px] object-cover rounded-full" alt="" />
             <div className="w-[158px]">
-              <h3 className="text-lg text-[var(--gray-color)]">Dr.Batoul Homsi</h3>
+              <h3 className="text-lg text-[var(--gray-color)]">Dr.Layan Habib</h3>
               <div className="flex justify-between w-[81%] items-center mt-1">
                 <div className="rate flex">
                   <box-icon

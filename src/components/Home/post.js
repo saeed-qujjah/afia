@@ -1,8 +1,8 @@
 import React, {  useState } from "react";
-import imageuser from "../../global/images/cute-business-woman-idea-thinking-present-pink-background-3d-rendering(1).jpg";
 import Comment from "./comment";
 import axios from "axios";
 import { API } from "../../data/config";
+import img from "../../global/images/photo_2023-08-12_04-33-51.jpg"
 import swal from "sweetalert";
 import Cookies from "js-cookie";
 import formatDate from "../../utils/formatDate";
@@ -55,8 +55,8 @@ const Post = ({ post, comments }) => {
           <div className="flex items-center justify-between mb-5 text-[var(--gray-color)]">
             <div className="flex items-center">
               <img
-                className="w-[45px] h-[45px] rounded-full"
-                src={imageuser}
+                className="w-[45px] h-[45px] rounded-full object-cover"
+                src={post.user.photo ? post.user.photo : img}
                 alt=""
               />
               <div className="pl-[20px]">

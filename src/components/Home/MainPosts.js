@@ -20,6 +20,7 @@ const MainPosts = (props) => {
         }
       })
       .then((res) => {
+        console.log(res.data.data)
         setPosts(res.data.data);
       });
   }, []);

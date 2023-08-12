@@ -22,7 +22,7 @@ const TrConsultations = ({
     <tr>
       {!isDoctor && <td>{consultation.doctor.specialization.name}</td>}
       {!isDoctor && (
-        <td>
+        <td style={{width:"10%"}}>
           {`${consultation.doctor.first_name} ${consultation.doctor.last_name}`}
         </td>
       )}
@@ -31,10 +31,10 @@ const TrConsultations = ({
           {consultation.patient.first_name} {consultation.patient.last_name}
         </td>
       )}
-      <td>{consultation.symptoms}</td>
+      <td style={{width:"25%"}}>{consultation.symptoms}</td>
       <td>{consultation.additional_explanation}</td>
-      <td>{consultation.done ? "Done" : "Pending"}</td>
-      <td>{consultationDate}</td>
+      <td style={{width:"1%"}}>{consultation.done ? "Done" : "Pending"}</td>
+      <td style={{width:"1%"}}>{consultationDate}</td>
       <td>
         {!forReviews && !isDoctor && (
           <div className="flex justify-between items-center w-[60%] m-auto">

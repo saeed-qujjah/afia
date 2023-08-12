@@ -31,7 +31,7 @@ const NewReview = () => {
             <th>Symptoms</th>
             <th>explanation</th>
             <th>status</th>
-            <th>Date created</th>
+            <th>Created</th>
             <th>procedures</th>
           </tr>
         </thead>

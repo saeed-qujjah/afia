@@ -39,7 +39,30 @@ const ReplyRevForm = ({onBack,reviewReply}) => {
               />
               <label className="top-top">Review reason</label>
             </div>
+            <div className="w-[100%] relative flex justify-between items-center">
             <div className="child w-[100%] relative mb-5">
+              <textarea
+                className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
+                type="text"
+                style={{ height: "150px", width: "97%", padding: "12px" }}
+                readOnly
+                value={reviewReply.diagnosis}
+              />
+              <label className="top-top">Diagnosis</label>
+            </div>
+            <div className="child w-[100%] relative mb-5">
+              <textarea
+                className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
+                type="text"
+                name="prescription"
+                style={{ height: "150px", width: "100%", padding: "12px" }}
+                readOnly
+                value={reviewReply.prescription}
+              />
+              <label className="top-top">Prescription</label>
+            </div>
+          </div>
+            {/* <div className="child w-[100%] relative mb-5">
               <input
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
                 type="text"
@@ -56,7 +79,7 @@ const ReplyRevForm = ({onBack,reviewReply}) => {
                 value={reviewReply.prescription}
               />
               <label className="top-top">Prescription</label>
-            </div>
+            </div> */}
             <div className="w-[100%] relative flex justify-between items-center">
               <div className="child">
                 <input

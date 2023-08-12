@@ -139,7 +139,7 @@ const ViewReviews = () => {
             <th>Review reason</th>
             <th>Explanation</th>
             <th>Status</th>
-            <th>Date created</th>
+            <th>Created</th>
             <th>Procedures</th>
           </tr>
         </thead>

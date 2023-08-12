@@ -139,7 +139,7 @@ table td {
   font-size: 15px;
   color: var(--gray-color);
   white-space: break-spaces;
-  padding: 2px 0;
+  padding:3px;
 }
 table td:not(:last-of-type) {
   opacity: 70%;
