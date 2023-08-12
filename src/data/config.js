@@ -12,6 +12,7 @@ export const API = {
     VERIFICATION_CODE: `${AUTH_URL}/send-verification-code/`,
     VERIFY: `${AUTH_URL}/verify/`,
     CHANGE_PASSWORD: `${AUTH_URL}/change-password/`,
+    RESET_PASSWORD: `${AUTH_URL}/reset-password/`,
     CHANGE_EMAIL: `${AUTH_URL}/change-email/`,
   },
   profile: {

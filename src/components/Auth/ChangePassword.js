@@ -27,17 +27,13 @@ const ChangePassword = () => {
     e.preventDefault();
     if (confirmPass === user.password) {
       axios
-        .post(API.auth.CHANGE_PASSWORD, user, {
+        .put(API.auth.CHANGE_PASSWORD, user, {
           headers: {
             Authorization: "JWT " + Cookies.get("accessToken")
           }
         })
         .then((res) => {
-          // dispatch(authAction.replaceUserData(res.data.data.user));
-          // Cookies.set("user", JSON.stringify(res.data.data.user), {
-          //   path: "/",
-          //   expires: 10
-          // });
+          console.log(res.data);
           swal({
             title: `${res.data.message}`,
             timer: 3000,
@@ -69,14 +65,6 @@ const ChangePassword = () => {
         className='register text-[var(--p-color)] relative flex items-center bg-[url("/src/global/images/medicine-capsules-global-health-with-geometric-pattern-digital-remix.jpg")]
         w-[100%] h-[100vh] bg-no-repeat bg-cover'
       >
-        {/* <button
-          onClick={() => {
-            nav("/Aafia/Home");
-          }}
-          className="border border-[var(--gray-color)] bg-[var(--greenLigth-color)] px-[30px] py-[8px] absolute top-4 right-4 outline-none cursor-pointer font-bold rounded-lg text-[var(--gray-color)] "
-        >
-          Back
-        </button> */}
         <div className="z-40 w-[400px] h-[400px] rounded-2xl bg-[var(--green-color)] absolute left-[37%] p-4 shadow-xl">
           <div className="flex justify-center items-center flex-col">
             <h1 className="text-3xl font-bold">Change Password</h1>
@@ -91,6 +79,7 @@ const ChangePassword = () => {
                 onChange={changeHandler}
                 value={user.old_password}
                 placeholder="Old Password"
+                required
               />
               {!showOldPass && (
                 <box-icon
@@ -132,6 +121,7 @@ const ChangePassword = () => {
                 onChange={changeHandler}
                 value={user.password}
                 placeholder="New Password"
+                required
               />
               {!showPassword && (
                 <box-icon
@@ -173,6 +163,7 @@ const ChangePassword = () => {
                 value={confirmPass}
                 onChange={(e) => setConfirmPass(e.target.value)}
                 placeholder="Confirm New Password"
+                required
               />
               {!showCPassword && (
                 <box-icon
