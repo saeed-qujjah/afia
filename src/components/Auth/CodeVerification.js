@@ -1,19 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { API } from "../../data/config";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { authAction } from "../../store/auth";
 import Cookies from "js-cookie";
 
 const CodeVerification = () => {
-  // const dispatch = useDispatch();
   const [code, setCode] = useState("");
   const nav = useNavigate();
-  const email = Cookies.get("user") ? JSON.parse(Cookies.get("user")).email : "" ;
-
+  const email = Cookies.get("user")
+    ? JSON.parse(Cookies.get("user")).email
+    : "";
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -23,18 +20,17 @@ const CodeVerification = () => {
         email_code: code
       })
       .then((res) => {
-        console.log(res.data);
-        Cookies.set("user", JSON.stringify(res.data.data.user) ,{
-          path:"/",
-          expires:10,
+        Cookies.set("user", JSON.stringify(res.data.data.user), {
+          path: "/",
+          expires: 10
         });
-        Cookies.set("accessToken", res.data.data.access ,{
-          path:"/",
-          expires:10,
+        Cookies.set("accessToken", res.data.data.access, {
+          path: "/",
+          expires: 10
         });
-        Cookies.set("refeshToken", res.data.data.refresh ,{
-          path:"/",
-          expires:10,
+        Cookies.set("refeshToken", res.data.data.refresh, {
+          path: "/",
+          expires: 10
         });
         swal({
           title: `${res.data.message}`,
@@ -56,15 +52,13 @@ const CodeVerification = () => {
   };
 
   const resendCodeHandler = () => {
-    axios
-      .put(API.auth.VERIFICATION_CODE, { email: email })
-      .then((res) => {
-        swal({
-          title: `${res.data.message}`,
-          timer: 3000,
-          icon: "success"
-        });
-      })
+    axios.put(API.auth.VERIFICATION_CODE, { email: email }).then((res) => {
+      swal({
+        title: `${res.data.message}`,
+        timer: 3000,
+        icon: "success"
+      });
+    });
   };
 
   return (

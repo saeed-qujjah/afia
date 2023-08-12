@@ -33,7 +33,6 @@ const ChangePassword = () => {
           }
         })
         .then((res) => {
-          console.log(res.data);
           swal({
             title: `${res.data.message}`,
             timer: 3000,
@@ -111,7 +110,6 @@ const ChangePassword = () => {
                   }}
                 ></box-icon>
               )}
-              {/* <box-icon name='user' color="#16a34a" style={{position:"absolute", top:"25%" , left:"10px"}}></box-icon> */}
             </div>
             <div className="w-[100%] relative mb-5">
               <input
@@ -153,7 +151,6 @@ const ChangePassword = () => {
                   }}
                 ></box-icon>
               )}
-              {/* <box-icon name='user' color="#16a34a" style={{position:"absolute", top:"25%" , left:"10px"}}></box-icon> */}
             </div>
             <div className="w-[100%] relative mb-5">
               <input
@@ -195,7 +192,6 @@ const ChangePassword = () => {
                   }}
                 ></box-icon>
               )}
-              {/* <box-icon name='user' color="#16a34a" style={{position:"absolute", top:"25%" , left:"10px"}}></box-icon> */}
             </div>
             <div className="flex justify-center items-center">
               <div className="w-[31%] flex justify-between items-center mb-8 mt-5">

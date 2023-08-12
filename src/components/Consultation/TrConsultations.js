@@ -18,11 +18,12 @@ const TrConsultations = ({
   const consultationDate = `${createDate.getFullYear()}-${
     createDate.getMonth() + 1
   }-${createDate.getDate()}`;
+
   return (
     <tr>
       {!isDoctor && <td>{consultation.doctor.specialization.name}</td>}
       {!isDoctor && (
-        <td style={{width:"10%"}}>
+        <td style={{ width: "10%" }}>
           {`${consultation.doctor.first_name} ${consultation.doctor.last_name}`}
         </td>
       )}
@@ -31,10 +32,10 @@ const TrConsultations = ({
           {consultation.patient.first_name} {consultation.patient.last_name}
         </td>
       )}
-      <td style={{width:"25%"}}>{consultation.symptoms}</td>
+      <td style={{ width: "25%" }}>{consultation.symptoms}</td>
       <td>{consultation.additional_explanation}</td>
-      <td style={{width:"1%"}}>{consultation.done ? "Done" : "Pending"}</td>
-      <td style={{width:"1%"}}>{consultationDate}</td>
+      <td style={{ width: "1%" }}>{consultation.done ? "Done" : "Pending"}</td>
+      <td style={{ width: "1%" }}>{consultationDate}</td>
       <td>
         {!forReviews && !isDoctor && (
           <div className="flex justify-between items-center w-[60%] m-auto">
@@ -61,12 +62,7 @@ const TrConsultations = ({
               />
             )}
             <NavLink to={`/Aafia/ConReview/${consultation.id}`}>
-              <img
-                className="w-6 cursor-pointer"
-                src={review}
-                // onClick={() => nav("/Aafia/ConReview/2")}
-                alt=""
-              />
+              <img className="w-6 cursor-pointer" src={review} alt="" />
             </NavLink>
           </div>
         )}
@@ -89,7 +85,6 @@ const TrConsultations = ({
               <img
                 className="w-6 cursor-pointer"
                 src={consultation.done ? edit : details}
-                // onClick={() => nav("/Aafia/ConReview/2")}
                 alt=""
               />
             </NavLink>

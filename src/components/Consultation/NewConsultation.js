@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "./Consultation.css";
 import heart from "../../global/images/heart.png";
 import ophthalmology from "../../global/images/ophthalmology.png";
@@ -11,28 +11,27 @@ import Psychiatry from "../../global/images/antidepressants.png";
 import other from "../../global/images/trust.png";
 import { useState } from "react";
 import ConsultationForm from "./ConsultationForm";
-import { useLocation } from "react-router-dom";
 
 const NewConsultation = () => {
   const [showForm, setShowForm] = useState(false);
-  // const pageRef = useRef(null);
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   pageRef.current.scrollIntoView({ behavior: 'smooth' });
-  // }, [location]);
 
   const showFormHandler = (department) => {
     setShowForm(department);
   };
 
   const goBackHandler = () => {
-    setShowForm(false)
-  }
+    setShowForm(false);
+  };
 
   return (
     <div className="py-20 features">
-      {showForm && <ConsultationForm goBackHandler={goBackHandler} method={"create"} specialization={showForm} />}
+      {showForm && (
+        <ConsultationForm
+          goBackHandler={goBackHandler}
+          method={"create"}
+          specialization={showForm}
+        />
+      )}
       <div class="container">
         <div class="feat" onClick={() => showFormHandler("Cardiology")}>
           <img src={heart} alt="" className="w-14 ml-[40%]" />

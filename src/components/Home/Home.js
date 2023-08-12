@@ -9,13 +9,16 @@ const SocialMedia = () => {
   const location = useLocation();
 
   useEffect(() => {
-    pageRef.current.scrollIntoView({ behavior: 'smooth' });
+    pageRef.current.scrollIntoView({ behavior: "smooth" });
   }, [location]);
-  return <div className="flex pt-[62px] justify-between items-start " ref={pageRef}>
-    <Left/>
-    <MainPosts />
-    <Right />
-  </div>;
+
+  return (
+    <div className="flex pt-[62px] justify-between items-start " ref={pageRef}>
+      <Left />
+      <MainPosts />
+      <Right />
+    </div>
+  );
 };
 
 export default SocialMedia;

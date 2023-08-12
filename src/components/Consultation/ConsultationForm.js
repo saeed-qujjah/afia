@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import swal from "sweetalert";
@@ -64,7 +63,6 @@ const ConsultationForm = ({
       (array) =>
         `${array.first_name} ${array.last_name}` === consultation.doctor_id
     );
-    console.log(doctorId.length)
     if (doctorId.length === 0) {
       swal({
         icon: "warning",
@@ -96,7 +94,6 @@ const ConsultationForm = ({
           }
         })
         .then((res) => {
-          console.log(res.data);
           swal({
             title: `${res.data.message}`,
             timer: 3000,
@@ -107,7 +104,6 @@ const ConsultationForm = ({
           }, [3040]);
         })
         .catch((err) => {
-          console.log(err.response.data);
           swal({
             icon: "warning",
             timer: 2100,
@@ -126,7 +122,6 @@ const ConsultationForm = ({
           }
         )
         .then((res) => {
-          console.log(res.data);
           swal({
             title: `${res.data.message}`,
             timer: 3000,
@@ -137,7 +132,6 @@ const ConsultationForm = ({
           }, [3040]);
         })
         .catch((err) => {
-          console.log(err.response.data);
           swal({
             icon: "warning",
             timer: 2100,
@@ -188,10 +182,11 @@ const ConsultationForm = ({
             </div>
           </div>
           <div className="child w-[100%] relative mb-5">
-            <input
-              className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
+            <textarea
+              className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] h-[200px] px-4 w-[100%]"
               type="text"
               name="symptoms"
+              style={{ height: "80px", width: "100%", padding: "12px" }}
               value={consultation.symptoms}
               onChange={changeHandler}
               required
@@ -199,10 +194,11 @@ const ConsultationForm = ({
             <label className="top-top">Symptoms *</label>
           </div>
           <div className="child w-[100%] relative mb-5">
-            <input
+            <textarea
               className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
               type="text"
               name="additional_explanation"
+              style={{ height: "80px", width: "100%", padding: "12px" }}
               value={consultation.additional_explanation}
               onChange={changeHandler}
             />
@@ -237,39 +233,6 @@ const ConsultationForm = ({
               </div>
             )}
           </div>
-          {/* <div className="flex justify-between items-center w-[54%] mb-4">
-            <div>
-              <input
-                type="radio"
-                className="accent-[var(--gray-color)] cursor-pointer mr-1"
-                id="doctor"
-                name="type"
-                value="doctor"
-                checked
-              />
-              <label
-                for="doctor"
-                className="cursor-pointer text-[var(--gray-color)] opacity-[90%]"
-              >
-                Non-emergency case
-              </label>
-            </div>
-            <div>
-              <input
-                className="accent-[var(--gray-color)] cursor-pointer mr-1"
-                type="radio"
-                id="emergency"
-                name="type"
-                value="emergency"
-              />
-              <label
-                for="emergency"
-                className="cursor-pointer text-[var(--gray-color)] opacity-[90%]"
-              >
-                Emergency case
-              </label>
-            </div>
-          </div> */}
           <div className="flex justify-end items-center">
             <div className="w-[31%] flex justify-between items-center mb-8 mt-5">
               <button

@@ -30,9 +30,9 @@ const Dating = () => {
   return (
     <div ref={pageRef}>
       <div className="pt-[62px] py-20 consoltation">
-        <div className="absolute top-0 left-0 w-[100%] h-[462px] bg-black z-20 opacity-[0.3]"></div>
-        <div className="relative mb-12">
-          <img src={img} alt="" className="h-[400px] w-[100%] object-cover" />
+        <div className="absolute top-0 left-0 w-[100%] h-[362px] bg-black z-20 opacity-[0.3]"></div>
+        <div className="relative">
+          <img src={img} alt="" className="h-[300px] w-[100%] object-cover" />
           <div className="flex mx-20 justify-between items-center absolute top-[40%] font-[Caprasimo] text-4xl w-[500px] text-[var(--p-color)]">
             {/* <img src={celender} alt="" className="w-24" />  */}
             <p className="text-4xl z-30">

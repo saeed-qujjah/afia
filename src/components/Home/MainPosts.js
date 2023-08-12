@@ -20,7 +20,6 @@ const MainPosts = (props) => {
         }
       })
       .then((res) => {
-        console.log(res.data.data)
         setPosts(res.data.data);
       });
   }, []);
@@ -41,7 +40,6 @@ const MainPosts = (props) => {
         }
       })
       .then((res) => {
-        console.log(res.data.data);
         setPosts([res.data.data, ...posts]);
         setPostText("");
         setPostImage("");

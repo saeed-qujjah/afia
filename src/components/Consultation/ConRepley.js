@@ -16,7 +16,6 @@ const ConRepley = () => {
   const { data: consultationReply } = UseAxiosGet(
     `${API.consultations.CONSULTATIONS}${param.id}`
   );
-  console.log(consultationReply);
   const [repley, setRepley] = useState({
     diagnosis: "",
     prescription: "",
@@ -91,7 +90,6 @@ const ConRepley = () => {
         }
       )
       .then((res) => {
-        console.log(res.data);
         swal({
           title: `${res.data.message}`,
           timer: 3000,
@@ -102,7 +100,6 @@ const ConRepley = () => {
         }, [3040]);
       })
       .catch((err) => {
-        console.log(err.response.data);
         swal({
           icon: "warning",
           timer: 2100,
@@ -114,7 +111,6 @@ const ConRepley = () => {
   return (
     <div className="pt-[62px]" ref={pageRef}>
       <div className="h-auto  px-20">
-        {/* <p className="my-7 text-lg text-[var(--gray-color)]">The fields marked with * are required</p> */}
         <p className="mt-7 text-xl text-[var(--gray-color)] font-bold">
           Patient information :
         </p>
@@ -245,28 +241,6 @@ const ConRepley = () => {
               )}
             </div>
           </div>
-          {/* <div className="imgcontent w-[100%] relative mb-5">
-            <input
-              className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
-              type="file"
-              style={{ display: "none" }}
-              id="analysis"
-              name="analysis"
-            />
-            <label className="top-top" htmlFor="analysis">
-              <box-icon
-                color="var(--green-color)"
-                type="solid"
-                name="file-plus"
-              ></box-icon>
-              Analysis (pdf or jpg)
-            </label>
-            {imageAnalysis && (
-              <div className="place-left">
-                <img src={imageAnalysis} alt="" />
-              </div>
-            )}
-          </div> */}
           <p className="text-xl text-[var(--gray-color)] mt-24 font-bold">
             Respond to the consultation :
           </p>
@@ -313,7 +287,6 @@ const ConRepley = () => {
             </div>
             <div className="child">
               <DatePicker
-                // className="subchild"
                 dateFormat="yyyy/MM/dd"
                 name="need_review_at"
                 isClearable

@@ -59,7 +59,6 @@ const ReviewForm = ({ goBackHandler, consultation, method, reviewEdit }) => {
           }
         })
         .then((res) => {
-          console.log(res.data);
           swal({
             title: `${res.data.message}`,
             timer: 3000,
@@ -70,7 +69,6 @@ const ReviewForm = ({ goBackHandler, consultation, method, reviewEdit }) => {
           }, [3040]);
         })
         .catch((err) => {
-          console.log(err.response.data);
           swal({
             icon: "warning",
             timer: 2100,
@@ -85,7 +83,6 @@ const ReviewForm = ({ goBackHandler, consultation, method, reviewEdit }) => {
           }
         })
         .then((res) => {
-          console.log(res.data);
           swal({
             title: `${res.data.message}`,
             timer: 3000,
@@ -96,7 +93,6 @@ const ReviewForm = ({ goBackHandler, consultation, method, reviewEdit }) => {
           }, [3040]);
         })
         .catch((err) => {
-          console.log(err.response.data);
           swal({
             icon: "warning",
             timer: 2100,
@@ -152,6 +148,7 @@ const ReviewForm = ({ goBackHandler, consultation, method, reviewEdit }) => {
               required
               name="review_reasons"
               value={review.review_reasons}
+              // style={{ height: "80px", width: "100%", padding: "12px" }}
               onChange={changeHandler}
             />
             <label className="top-top">Review reason *</label>
@@ -195,44 +192,13 @@ const ReviewForm = ({ goBackHandler, consultation, method, reviewEdit }) => {
               </div>
             )}
           </div>
-          {/* <div className="flex justify-between items-center w-[54%] mb-4">
-              <div>
-                <input
-                  type="radio"
-                  className="accent-[var(--gray-color)] cursor-pointer mr-1"
-                  id="doctor"
-                  name="type"
-                  value="doctor"
-                  checked
-                />
-                <label
-                  for="doctor"
-                  className="cursor-pointer text-[var(--gray-color)] opacity-[90%]"
-                >
-                  Non-emergency case
-                </label>
-              </div>
-              <div>
-                <input
-                  className="accent-[var(--gray-color)] cursor-pointer mr-1"
-                  type="radio"
-                  id="emergency"
-                  name="type"
-                  value="emergency"
-                />
-                <label
-                  for="emergency"
-                  className="cursor-pointer text-[var(--gray-color)] opacity-[90%]"
-                >
-                  Emergency case
-                </label>
-              </div>
-            </div> */}
           <div className="flex justify-end items-center">
             <div className="w-[32%] flex justify-between items-center mb-8 mt-5">
               <button
                 type="submit"
-                className={`${method === "edit" ? "w-[105px]" : "" } py-[9px] text-[var(--p-color)] px-[30px] font-bold bg-[var(--gray-color)] cursor-pointer shadow-lg rounded-lg`}
+                className={`${
+                  method === "edit" ? "w-[105px]" : ""
+                } py-[9px] text-[var(--p-color)] px-[30px] font-bold bg-[var(--gray-color)] cursor-pointer shadow-lg rounded-lg`}
               >
                 {method === "edit" ? "Edit" : "Submit"}
               </button>

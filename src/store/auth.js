@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 
 const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
 const token = Cookies.get("accessToken");
-//   const isLoggedIn = !!token && (user ? user?.phone_number && user?.email_verified : false);
 
 const initialState = {
   specializations: [],
@@ -15,12 +14,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
-    // replaceUserData(state, action) {
-    //   state.userData = action.payload;
-    // },
-    // replaceToken(state, action) {
-    //   state.token = action.payload;
-    // }
     replaceSpecializations(state, action) {
       state.specializations = action.payload;
     },

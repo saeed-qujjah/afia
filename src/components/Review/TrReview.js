@@ -54,7 +54,6 @@ const TrReview = ({ review, onDelete, onReply, onEdit ,isDoctor}) => {
               <img
                 className="w-6 cursor-pointer"
                 src={review.done ? edit : details}
-                // onClick={() => nav("/Aafia/ConReview/2")}
                 alt=""
               />
             </NavLink>

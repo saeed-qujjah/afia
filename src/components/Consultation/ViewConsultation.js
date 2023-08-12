@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import DeletePerson from "../../global/DeletePerson";
-import EditCon from "./EditCon";
 import Cookies from "js-cookie";
 import ReplyForm from "./ReplyForm";
 import { API } from "../../data/config";
@@ -87,15 +86,23 @@ const ViewConsultation = () => {
   const replyBackHandler = () => {
     setShowReply(false);
   };
+
   return (
     <div className="py-20 px-20">
       {del && (
         <DeletePerson onConfrim={confrimHandler} onBack={deleteBackHandler} />
       )}
       {showDetails && (
-        <ConsultationForm consultationEdit={showDetails} specialization={showDetails.doctor.specialization.name} method={"edit"} goBackHandler={editBackHandler} />
+        <ConsultationForm
+          consultationEdit={showDetails}
+          specialization={showDetails.doctor.specialization.name}
+          method={"edit"}
+          goBackHandler={editBackHandler}
+        />
       )}
-      {showReply && <ReplyForm consultationReply={showReply} onBack={replyBackHandler} />}
+      {showReply && (
+        <ReplyForm consultationReply={showReply} onBack={replyBackHandler} />
+      )}
       <div className="flex justify-between items-center">
         <div className="w-[32%]">
           <p className="text-[var(--greenLigth-color)]">Total consultations:</p>
@@ -114,13 +121,17 @@ const ViewConsultation = () => {
           </p>
         </div>
         <div className="w-[32%]">
-        {!isDoctor && <p className="text-[var(--greenLigth-color)]">
-            Consultations that need review:
-          </p>}
-         {!isDoctor && <p className="text-[var(--gray-color)] text-3xl mt-2">
-            {consultations.need_review_count}
-            <span className="text-sm ml-4">consultations</span>
-          </p>}
+          {!isDoctor && (
+            <p className="text-[var(--greenLigth-color)]">
+              Consultations that need review:
+            </p>
+          )}
+          {!isDoctor && (
+            <p className="text-[var(--gray-color)] text-3xl mt-2">
+              {consultations.need_review_count}
+              <span className="text-sm ml-4">consultations</span>
+            </p>
+          )}
         </div>
       </div>
       <table className="my-16">
@@ -141,7 +152,7 @@ const ViewConsultation = () => {
             return (
               <TrConsultations
                 key={index}
-                isDoctor ={isDoctor}
+                isDoctor={isDoctor}
                 consultation={consultation}
                 onEdit={editHandler}
                 onReply={showReplyHandler}
@@ -150,216 +161,6 @@ const ViewConsultation = () => {
               />
             );
           })}
-          {/* <tr>
-            <td>samer</td>
-            <td>hasan</td>
-            <td>hasan</td>
-            <td>hasan</td>
-            <td>80</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>400</td>
-            <td>400</td>
-            <td>400</td>
-            <td>total</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr> */}
         </tbody>
       </table>
     </div>

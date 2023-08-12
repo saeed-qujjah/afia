@@ -1,8 +1,8 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Comment from "./comment";
 import axios from "axios";
 import { API } from "../../data/config";
-import img from "../../global/images/photo_2023-08-12_04-33-51.jpg"
+import img from "../../global/images/photo_2023-08-12_04-33-51.jpg";
 import swal from "sweetalert";
 import Cookies from "js-cookie";
 import formatDate from "../../utils/formatDate";
@@ -12,8 +12,7 @@ const Post = ({ post, comments }) => {
   const [idPost, setIdPost] = useState("");
   const [showCom, setShowCom] = useState(false);
   const [commentArray, setCommentArray] = useState(comments);
-  const postDate = formatDate(new Date(post.created_at))
-  
+  const postDate = formatDate(new Date(post.created_at));
 
   const submitCommentHandler = (e) => {
     e.preventDefault();
@@ -31,7 +30,6 @@ const Post = ({ post, comments }) => {
         }
       )
       .then((res) => {
-        console.log(res.data);
         setComment("");
         setCommentArray([...commentArray, res.data.data]);
       })
@@ -111,9 +109,6 @@ const Post = ({ post, comments }) => {
               <box-icon name="smile" color="gray"></box-icon>
             </div>
           </form>
-          {/* {commentArray.length !== 0 && (
-            <hr className="border-[var(--gray-color)] mb-4"></hr>
-          )} */}
           <div className="text-[] flex flex-col mt-[10px]">
             {commentArray.length > 1 && (
               <div className="flex justify-start items-center text-[15px] ml-2 opacity-[0.7] mb-[10px]">

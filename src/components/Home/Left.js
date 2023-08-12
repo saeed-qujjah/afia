@@ -3,8 +3,6 @@ import "boxicons";
 import img from "../../global/images/bearded-doctor-glasses(1).jpg";
 import img2 from "../../global/images/girl.jpg";
 import img3 from "../../global/images/doctors-day-curly-handsome-cute-guy-medical-uniform-thinking-happily.jpg";
-import img4 from "../../global/images/arrangement-medical-still-life-elements.jpg";
-import img5 from "../../global/images/arrangement-medical-still-life-elements.jpg";
 
 const Left = () => {
   return (
@@ -17,7 +15,9 @@ const Left = () => {
           <div className="flex justify-between items-center pr-6">
             <img src={img} className="w-[47px] rounded-full" alt="" />
             <div className="w-[158px]">
-              <h3 className="text-lg text-[var(--gray-color)]">Dr.Osama Horani</h3>
+              <h3 className="text-lg text-[var(--gray-color)]">
+                Dr.Osama Horani
+              </h3>
               <div className="flex justify-between w-[90%] items-center mt-1">
                 <div className="rate flex">
                   <box-icon
@@ -45,7 +45,6 @@ const Left = () => {
                     color="var(--green-color)"
                     type="solid"
                   ></box-icon>
-                  {/* <box-icon name="star" color="var(--green-color)"></box-icon> */}
                 </div>
                 <p className="text-[var(--green-color)] font-bold">4.5</p>
               </div>
@@ -59,9 +58,15 @@ const Left = () => {
         </div>
         <div className="shadow-md  rounded-xl bg-[var(--post-color)] p-3">
           <div className="flex justify-between items-center pr-6">
-            <img src={img2} className="w-[47px] h-[47px] object-cover rounded-full" alt="" />
+            <img
+              src={img2}
+              className="w-[47px] h-[47px] object-cover rounded-full"
+              alt=""
+            />
             <div className="w-[158px]">
-              <h3 className="text-lg text-[var(--gray-color)]">Dr.Layan Habib</h3>
+              <h3 className="text-lg text-[var(--gray-color)]">
+                Dr.Layan Habib
+              </h3>
               <div className="flex justify-between w-[81%] items-center mt-1">
                 <div className="rate flex">
                   <box-icon
@@ -84,11 +89,6 @@ const Left = () => {
                     color="var(--green-color)"
                     name="star"
                   ></box-icon>
-                  {/* <box-icon
-                    name="star-half"
-                    color="var(--green-color)"
-                    type="solid"
-                  ></box-icon> */}
                   <box-icon name="star" color="var(--green-color)"></box-icon>
                 </div>
                 <p className="text-[var(--green-color)] font-bold">4</p>
@@ -97,15 +97,21 @@ const Left = () => {
           </div>
           <div className="text-[var(--gray-color)] w-[90%] ml-2">
             <p className="font-light text-sm opacity-[0.7] mt-3">
-            Neurology specialized since 2018 in Mowasat Hospital . . .
+              Neurology specialized since 2018 in Mowasat Hospital . . .
             </p>
           </div>
         </div>
         <div className="shadow-md  rounded-xl bg-[var(--post-color)] p-3">
           <div className="flex justify-between items-center pr-6">
-            <img src={img3} className="w-[47px] h-[47px] object-cover rounded-full" alt="" />
+            <img
+              src={img3}
+              className="w-[47px] h-[47px] object-cover rounded-full"
+              alt=""
+            />
             <div className="w-[158px]">
-              <h3 className="text-lg text-[var(--gray-color)]">Dr.Ammar Awad</h3>
+              <h3 className="text-lg text-[var(--gray-color)]">
+                Dr.Ammar Awad
+              </h3>
               <div className="flex justify-between w-[90%] items-center mt-1">
                 <div className="rate flex">
                   <box-icon
@@ -136,45 +142,10 @@ const Left = () => {
           </div>
           <div className="text-[var(--gray-color)] w-[90%] ml-2">
             <p className="font-light text-sm opacity-[0.7] mt-3">
-            Pediatrics specialized since 2018 in Mujtahid Hospital . . .
+              Pediatrics specialized since 2018 in Mujtahid Hospital . . .
             </p>
           </div>
         </div>
-        {/* <div className="flex shadow-md justify-between items-center rounded-xl bg-[var(--post-color)] p-3">
-          <img src={img} className="w-[24%] rounded-md" alt="" />
-          <div className="text-[var(--gray-color)] w-[71%]">
-            <h3 className="font-bold text-lg italic">Dr.Osama Horani</h3>
-            <div className="flex justify-between w-[80%] items-center mt-1">
-              <div className="rate flex">
-                <box-icon
-                  type="solid"
-                  color="var(--green-color)"
-                  name="star"
-                ></box-icon>
-                <box-icon
-                  type="solid"
-                  color="var(--green-color)"
-                  name="star"
-                ></box-icon>
-                <box-icon
-                  type="solid"
-                  color="var(--green-color)"
-                  name="star"
-                ></box-icon>
-                <box-icon
-                  name="star-half"
-                  color="var(--green-color)"
-                  type="solid"
-                ></box-icon>
-                <box-icon name="star" color="var(--green-color)"></box-icon>
-              </div>
-              <p className="text-[var(--green-color)] font-bold">4.5</p>
-            </div>
-            <p className="font-light text-sm opacity-[0.7] mt-3">
-              Cardiology specialized since 2016 in Mujtahid Hospital . . .
-            </p>
-          </div>
-        </div> */}
       </div>
     </div>
   );

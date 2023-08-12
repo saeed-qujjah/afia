@@ -17,6 +17,7 @@ const Review = () => {
   useEffect(() => {
     pageRef.current.scrollIntoView({ behavior: "smooth" });
   }, [location]);
+
   return (
     <div ref={pageRef}>
       <div className="review pt-[62px]">
@@ -29,22 +30,6 @@ const Review = () => {
               : "You can review the doctor who gave you the previous consultation at any time"}
           </p>
         </div>
-        {/* <div className="w-[100%] h-[70px] bg-white">
-        <ul className="flex justify-between pt-6 items-center w-[28%] mx-auto">
-          <li
-            className={newActive ? "active" : "unactive"}
-            onClick={() => setNewActive(true)}
-          >
-            New Review
-          </li>
-          <li
-            className={!newActive ? "active" : "unactive"}
-            onClick={() => setNewActive(false)}
-          >
-            My Reviews
-          </li>
-        </ul>
-      </div> */}
         {!isDoctor && (
           <div className="w-[27%] m-auto h-[60px] rounded-full bg-[var(--greenLigth-color)] border border-[var(--greenLigth-color)] mt-10 flex justify-center items-center">
             <ul className="flex justify-between items-center w-[100%] mx-auto">

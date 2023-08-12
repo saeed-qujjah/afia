@@ -59,7 +59,7 @@ const DoctorsAppointment = () => {
         {/* <img src={celender} alt="" className="w-24" />  */}
         <div className="flex font-[Caprasimo] justify-between items-center w-[48%]">
           <div className="w-3 h-3 rounded-full bg-[var(--gray-color)]"></div>
-          <p className="text-2xl z-30">
+          <p className="text-2xl z-30 w-[534px]">
             Doctors with{" "}
             <span className="text-[var(--green-color)]">{param.id}</span>{" "}
             specialization

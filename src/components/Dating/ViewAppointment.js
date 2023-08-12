@@ -135,10 +135,11 @@ const ViewAppointment = () => {
             {!isDoctor && <th>Specialization</th>}
             {!isDoctor && <th>Doctor</th>}
             {isDoctor && <th>Patient</th>}
+            <th>Booking date</th>
             <th>Country</th>
             <th>City</th>
             <th>Status</th>
-            <th>Date created</th>
+            <th>Created</th>
             <th>Procedures</th>
           </tr>
         </thead>

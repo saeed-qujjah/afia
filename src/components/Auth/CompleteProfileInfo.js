@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import UseAxiosGet from "../../hooks/useAxiosGet";
 import { API } from "../../data/config";
 import swal from "sweetalert";
@@ -11,7 +11,7 @@ import axios from "axios";
 import { authAction } from "../../store/auth";
 
 const CompleteProfileInfo = () => {
-  const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")): null;
+  const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
   const dispatch = useDispatch();
   const isDoctor = user?.role === 1 ? false : true;
   const nav = useNavigate();
@@ -116,7 +116,6 @@ const CompleteProfileInfo = () => {
     const url = isDoctor
       ? API.profile.DOCTOR_PROFILE
       : API.profile.PATIENT_PROFILE;
-    console.log(completeData.city, cities.data);
     const cityId = cities?.data.filter(
       (array) => array.name === completeData.city
     )[0].id;
@@ -259,7 +258,6 @@ const CompleteProfileInfo = () => {
                   }}
                   list="countries"
                 />
-                {/* <DatePicker selected={new Date()}/> */}
                 <label className="top-top">Country *</label>
                 <datalist id="countries">
                   {countries?.data.map((country, index) => (

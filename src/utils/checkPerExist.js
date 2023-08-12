@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import AuthContext from "../context/auth-context";
 
-
 const CheckPerExist = (permission) => {
   const ctx = useContext(AuthContext);
   const permissions = ctx.permission;

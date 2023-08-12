@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import NavBar from "../NavBar";
 import img from "../../global/images/medical-banner-with-doctor-holding-stethoscope.jpg";
 import "./Consultation.css";
 import { useState } from "react";
@@ -19,6 +18,7 @@ const Consultation = () => {
   useEffect(() => {
     pageRef.current.scrollIntoView({ behavior: "smooth" });
   }, [location]);
+
   return (
     <div ref={pageRef}>
       <div className="consoltation pt-[62px]">

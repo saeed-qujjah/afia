@@ -32,6 +32,7 @@ const TrAppointment = ({
         </td>
       )}
       <td>{consultation.symptoms}</td>
+      <td>{consultation.symptoms}</td>
       <td>{consultation.additional_explanation}</td>
       <td>{consultation.done ? "Done" : "Pending"}</td>
       <td>{consultationDate}</td>

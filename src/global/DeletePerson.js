@@ -3,7 +3,10 @@ import classes from "./DeletePerson.module.css";
 
 const DeletePerson = (props) => {
   return (
-    <div style={{ backgroundColor: "rgb(0 0 0 / 40%)" }} className="fixed w-[100%] h-[100vh] top-0 right-0 z-[1000] flex justify-center items-center">
+    <div
+      style={{ backgroundColor: "rgb(0 0 0 / 40%)" }}
+      className="fixed w-[100%] h-[100vh] top-0 right-0 z-[1000] flex justify-center items-center"
+    >
       <div className={classes.container}>
         <header className={classes.header}>
           <h2>Delete the record</h2>
