@@ -66,7 +66,7 @@ const BoxDoctor = ({ doctor, setShowForm,year,hospital }) => {
       </div>
       <div className="text-[var(--gray-color)] w-[100%]">
         <p className="font-light text-sm opacity-[0.8] mt-3">
-          {doctor.specialization.name} specialized since {year} in {hospital} Hospital . . .
+          {doctor.experience}
         </p>
       </div>
     </div>

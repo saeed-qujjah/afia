@@ -54,28 +54,7 @@ const DoctorsAppointment = () => {
     if (!doctorsData) return;
     setDoctors(doctorsData.data);
   }, [doctorsData]);
-  // const data = [
-  //   "Dr.Osama Horani",
-  //   "Dr.Saeed Koja",
-  //   "Dr.Suliman Awad",
-  //   "Dr.Mostafa Korde",
-  //   "Dr.Mosa Masri",
-  //   "Dr.Majd Ebrahim",
-  //   "Dr.Ahmad Essa"
-  // ];
-  //   const years = [
-  //     "2020",
-  //     "2016",
-  //     "2019",
-  //     "2013",
-  //     "2018",
-  //     "2015",
-  //     "2017",
-  //     "2014"
-  //   ];
-  //   const year = years[Math.floor(Math.random() * years.length)];
-  //   const hospitals = ["Mujtahid","Ibn al-Nafis","Tishreen","Mouwasat","Al-Shami","Al-Zahra","Al-Razi"]
-  //   const hospital = hospitals[Math.floor(Math.random() * hospitals.length)];
+
   const goBackHandler = () => {
     setShowForm(false);
   };
@@ -141,14 +120,7 @@ const DoctorsAppointment = () => {
         }}
       >
         {doctors?.map((doctor) => {
-          return (
-            <BoxDoctor
-              hospital={hospitals[Math.floor(Math.random() * hospitals.length)]}
-              year={years[Math.floor(Math.random() * years.length)]}
-              setShowForm={setShowForm}
-              doctor={doctor}
-            />
-          );
+          return <BoxDoctor setShowForm={setShowForm} doctor={doctor} />;
         })}
         {/* <div className="shadow-md  rounded-xl bg-white p-3">
           <div className="flex justify-between items-center">
