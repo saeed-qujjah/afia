@@ -6,69 +6,71 @@ import Cookies from "js-cookie";
 import ReplyForm from "./ReplyForm";
 import { API } from "../../data/config";
 import TrAppointment from "./TrAppointment";
+import FormDoctorRepley from "./FormDoctorRepley";
+import AcceptOrCancel from "./AcceptOrCancel";
 // import ConsultationForm from "./ConsultationForm";
 
 const ViewAppointment = () => {
-  const [del, setDel] = useState();
-  const [conId, setConId] = useState("");
-  const [consultations, setConsultations] = useState([]);
-  const [showDetails, setShowDetails] = useState(false);
-  const [showReply, setShowReply] = useState(false);
+  const [appointmentId, setAppointmentId] = useState("");
+  const [appointments, setAppointment] = useState([]);
+  // const [showDetails, setShowDetails] = useState(false);
+  // const [showReply, setShowReply] = useState(false);
+  const [action, setAction] = useState(false);
+  const [showFormDoctor, setShowFormDoctor] = useState(false);
+  const [showSureForm, setShowSureForm] = useState(false);
   const [fetchAgain, setFetchAgain] = useState(false);
-  const [isPending, setIsPending] = useState(false);
   const isDoctor = !!Cookies.get("user")
     ? JSON.parse(Cookies.get("user")).role === 0
     : false;
 
-  const deleteHandler = (id, isPending) => {
-    setConId(id);
-    setDel(true);
-    setIsPending(isPending);
-  };
+  // const deleteHandler = (id, isPending) => {
+  //   setConId(id);
+  //   setDel(true);
+  //   setIsPending(isPending);
+  // };
 
   const confrimHandler = () => {
+    const http =
+      action === "Confirm"
+        ? API.appointment.CONFIRM_APPOINYMENT
+        : API.appointment.CANCEL_APPOINYMENT;
     axios
-      .delete(`${API.consultations.CONSULTATIONS}${conId}`, {
-        headers: {
-          Authorization: "JWT " + Cookies.get("accessToken")
+      .put(
+        `${http}${appointmentId}/`,
+        {},
+        {
+          headers: {
+            Authorization: "JWT " + Cookies.get("accessToken")
+          }
         }
-      })
+      )
       .then((res) => {
-        console.log(res);
-        setDel(false);
-        setConsultations((prev) => {
-          return {
-            ...prev,
-            count: consultations.count - 1,
-            pending_count: isPending
-              ? consultations.pending_count - 1
-              : consultations.pending,
-            data: consultations.data.filter((array) => array.id !== conId)
-          };
-        });
+        console.log(res.data);
+        setShowSureForm(false);
+        setFetchAgain(!fetchAgain);
       });
   };
 
   const deleteBackHandler = () => {
-    setDel(false);
+    setShowSureForm(false);
   };
 
-  const editBackHandler = (edit) => {
-    if (edit) {
-      setFetchAgain(!fetchAgain);
-    }
-    setShowDetails(false);
-  };
+  // const editBackHandler = (edit) => {
+  //   if (edit) {
+  //     setFetchAgain(!fetchAgain);
+  //   }
+  //   setShowDetails(false);
+  // };
 
   const fetchHandler = useCallback(() => {
     axios
-      .get(API.consultations.CONSULTATIONS, {
+      .get(API.appointment.GET_APPOINYMENTS, {
         headers: {
           Authorization: "JWT " + Cookies.get("accessToken")
         }
       })
       .then((res) => {
-        setConsultations(res.data.data);
+        setAppointment(res.data.data);
       });
   }, []);
 
@@ -76,57 +78,92 @@ const ViewAppointment = () => {
     fetchHandler();
   }, [fetchHandler, fetchAgain]);
 
-  const editHandler = (consultation) => {
-    setShowDetails(consultation);
+  // const editHandler = (consultation) => {
+  //   setShowDetails(consultation);
+  // };
+
+  // const showReplyHandler = (consultation) => {
+  //   setShowReply(consultation);
+  // };
+
+  // const replyBackHandler = () => {
+  //   setShowReply(false);
+  // };
+
+  const acceptedHandler = (appointment, isDoctor) => {
+    if (isDoctor) {
+      setShowFormDoctor(appointment);
+      setAction("Accept");
+    } else {
+      setAction("Confirm");
+      setShowSureForm(true);
+      setAppointmentId(appointment.id);
+    }
+  };
+  const rejectedHandler = (appointment, isDoctor) => {
+    if (isDoctor) {
+      setShowFormDoctor(appointment);
+      setAction("Reject");
+    } else {
+      setAction("Cancel");
+      setShowSureForm(true);
+      setAppointmentId(appointment.id);
+    }
   };
 
-  const showReplyHandler = (consultation) => {
-    setShowReply(consultation);
+  const goBackHandler = () => {
+    setFetchAgain(!fetchAgain);
+    setShowFormDoctor(false);
   };
-
-  const replyBackHandler = () => {
-    setShowReply(false);
-  };
+console.log(appointments)
   return (
     <div className="py-20 px-20">
-      {del && (
-        <DeletePerson onConfrim={confrimHandler} onBack={deleteBackHandler} />
+      {showSureForm && (
+        <AcceptOrCancel
+          action={action}
+          onConfrim={confrimHandler}
+          onBack={deleteBackHandler}
+        />
       )}
-      {/* {showDetails && (
-        <ConsultationForm consultationEdit={showDetails} specialization={showDetails.doctor.specialization.name} method={"edit"} goBackHandler={editBackHandler} />
-      )} */}
-      {showReply && (
+      {showFormDoctor && (
+        <FormDoctorRepley
+          appointment={showFormDoctor}
+          action={action}
+          goBackHandler={goBackHandler}
+        />
+      )}
+      {/* {showReply && (
         <ReplyForm consultationReply={showReply} onBack={replyBackHandler} />
-      )}
+      )} */}
       <div className="flex justify-between items-center">
         <div className="w-[32%]">
           <p className="text-[var(--greenLigth-color)]">Total Appointments:</p>
           <p className="text-[var(--gray-color)] text-3xl mt-2">
-            {consultations.count}5
+            {appointments.count}
             <span className="text-sm ml-4">Appointments</span>
           </p>
         </div>
         <div className="w-[32%]">
           <p className="text-[var(--greenLigth-color)]">
-            Pending Appointments :
+            Accepted Appointments :
           </p>
           <p className="text-[var(--gray-color)] text-3xl mt-2">
-            {consultations.pending_count}3
+            {appointments.accepted_count}
             <span className="text-sm ml-4">Appointments</span>
           </p>
         </div>
         <div className="w-[32%]">
-          {!isDoctor && (
-            <p className="text-[var(--greenLigth-color)]">
-              Appointments that need review:
-            </p>
-          )}
-          {!isDoctor && (
-            <p className="text-[var(--gray-color)] text-3xl mt-2">
-              {consultations.need_review_count}2
-              <span className="text-sm ml-4">Appointments</span>
-            </p>
-          )}
+          {/* {!isDoctor && ( */}
+          <p className="text-[var(--greenLigth-color)]">
+            Rejected Appointments :
+          </p>
+          {/* )} */}
+          {/* {!isDoctor && ( */}
+          <p className="text-[var(--gray-color)] text-3xl mt-2">
+            {appointments.rejected_count}
+            <span className="text-sm ml-4">Appointments</span>
+          </p>
+          {/* )} */}
         </div>
       </div>
       <table className="my-16">
@@ -136,237 +173,29 @@ const ViewAppointment = () => {
             {!isDoctor && <th>Doctor</th>}
             {isDoctor && <th>Patient</th>}
             <th>Booking date</th>
-            <th>Country</th>
             <th>City</th>
             <th>Status</th>
-            <th>Created</th>
+            <th>Time</th>
+            <th>Notes</th>
             <th>Procedures</th>
           </tr>
         </thead>
         <tbody>
-          {consultations.data?.map((consultation, index) => {
+          {appointments.data?.map((appointment, index) => {
             return (
               <TrAppointment
                 key={index}
                 isDoctor={isDoctor}
-                consultation={consultation}
-                onEdit={editHandler}
-                onReply={showReplyHandler}
-                forReviews={false}
-                onDelete={deleteHandler}
+                appointment={appointment}
+                // onEdit={editHandler}
+                // onReply={showReplyHandler}
+                // onDelete={deleteHandler}
+                onAccept={acceptedHandler}
+                onReject={rejectedHandler}
+                // onConfirm={confrimBookingHandler}
               />
             );
           })}
-          {/* <tr>
-            <td>samer</td>
-            <td>hasan</td>
-            <td>hasan</td>
-            <td>hasan</td>
-            <td>80</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>400</td>
-            <td>400</td>
-            <td>400</td>
-            <td>total</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>total</td>
-            <td>400</td>
-            <td>
-              <div className="flex justify-between items-center w-[50%] m-auto">
-                <img className="w-6 cursor-pointer" src={deletes} alt="" />
-                <img className="w-6 cursor-pointer" src={edit} alt="" />
-                <img className="w-6 cursor-pointer" src={details} alt="" />
-              </div>
-            </td>
-          </tr> */}
         </tbody>
       </table>
     </div>

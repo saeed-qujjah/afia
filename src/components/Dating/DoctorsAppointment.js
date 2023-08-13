@@ -8,26 +8,61 @@ import add2 from "../../global/images/appointment.png";
 import img3 from "../../global/images/doctors-day-curly-handsome-cute-guy-medical-uniform-thinking-happily.jpg";
 import AppointmentForm from "./AppointmetForm";
 import BoxDoctor from "./BoxDoctor";
+import UseAxiosGet from "../../hooks/useAxiosGet";
+import { API } from "../../data/config";
+import { useSelector } from "react-redux";
 
 const DoctorsAppointment = () => {
   const param = useParams();
+  const specializations = useSelector((state) => state.auth.specializations);
+  const id_specialization = specializations.filter(
+    (array) => array.name === param.id
+  )[0].id;
+  const years = [
+    "2020",
+    "2016",
+    "2019",
+    "2013",
+    "2018",
+    "2015",
+    "2017",
+    "2014"
+  ];
+  const year = years[Math.floor(Math.random() * years.length)];
+  const hospitals = [
+    "Mujtahid",
+    "Ibn al-Nafis",
+    "Tishreen",
+    "Mouwasat",
+    "Al-Shami",
+    "Al-Zahra",
+    "Al-Razi"
+  ];
+  const hospital = hospitals[Math.floor(Math.random() * hospitals.length)];
   const pageRef = useRef(null);
   const location = useLocation();
-
+  const { data: doctorsData } = UseAxiosGet(
+    `${API.profile.GET_DOCTORS_FOR_SPECIALIZATION}?specialization_id=${id_specialization}`
+  );
   useEffect(() => {
     pageRef.current.scrollIntoView({ behavior: "smooth" });
   }, [location]);
   const nav = useNavigate();
   const [showForm, setShowForm] = useState(false);
-  const data = [
-    "Dr.Osama Horani",
-    "Dr.Saeed Koja",
-    "Dr.Suliman Awad",
-    "Dr.Mostafa Korde",
-    "Dr.Mosa Masri",
-    "Dr.Majd Ebrahim",
-    "Dr.Ahmad Essa"
-  ];
+  const [doctors, setDoctors] = useState([]);
+  useEffect(() => {
+    if (!doctorsData) return;
+    setDoctors(doctorsData.data);
+  }, [doctorsData]);
+  // const data = [
+  //   "Dr.Osama Horani",
+  //   "Dr.Saeed Koja",
+  //   "Dr.Suliman Awad",
+  //   "Dr.Mostafa Korde",
+  //   "Dr.Mosa Masri",
+  //   "Dr.Majd Ebrahim",
+  //   "Dr.Ahmad Essa"
+  // ];
   //   const years = [
   //     "2020",
   //     "2016",
@@ -42,8 +77,24 @@ const DoctorsAppointment = () => {
   //   const hospitals = ["Mujtahid","Ibn al-Nafis","Tishreen","Mouwasat","Al-Shami","Al-Zahra","Al-Razi"]
   //   const hospital = hospitals[Math.floor(Math.random() * hospitals.length)];
   const goBackHandler = () => {
-    console.log("ddd");
     setShowForm(false);
+  };
+
+  const searchHandler = (e) => {
+    let searchQuery = e.target.value;
+    let resultSearch = doctorsData?.data.filter((doctor) => {
+      return (
+        doctor.first_name.includes(searchQuery) ||
+        doctor.last_name.includes(searchQuery) ||
+        doctor.city.country.includes(searchQuery) ||
+        doctor.city.name.includes(searchQuery)
+      );
+    });
+    if (searchQuery === "") {
+      setDoctors(doctorsData.data);
+    } else {
+      setDoctors(resultSearch);
+    }
   };
 
   return (
@@ -53,13 +104,14 @@ const DoctorsAppointment = () => {
           goBackHandler={goBackHandler}
           specialization={param.id}
           doctor={showForm}
+          method="create"
         />
       )}
       <div className="flex mx-20 mt-6 mb-20 justify-between items-center text-[var(--gray-color)]">
         {/* <img src={celender} alt="" className="w-24" />  */}
-        <div className="flex font-[Caprasimo] justify-between items-center w-[48%]">
+        <div className="flex font-[Caprasimo] justify-between items-center w-[50%]">
           <div className="w-3 h-3 rounded-full bg-[var(--gray-color)]"></div>
-          <p className="text-2xl z-30 w-[534px]">
+          <p className="text-2xl z-30 min-w-[534px] max-w-[560px]">
             Doctors with{" "}
             <span className="text-[var(--green-color)]">{param.id}</span>{" "}
             specialization
@@ -71,6 +123,7 @@ const DoctorsAppointment = () => {
             placeholder="Search for a specific doctor, country or city"
             className="shadow-md w-[500px] border border-[var(--gray-color)] rounded-l-full rounded-r-full py-2 pr-2 pl-12 bg-inherit"
             name="searsh"
+            onChange={searchHandler}
           />
           <div className="absolute top-[10px] left-4 opacity-[0.6]">
             <box-icon name="search" color="var(--gray-color)"></box-icon>
@@ -87,10 +140,11 @@ const DoctorsAppointment = () => {
           maxWidth: "100%"
         }}
       >
-        {data.map((doctor) => {
+        {doctors?.map((doctor) => {
           return (
             <BoxDoctor
-              specialization={param.id}
+              hospital={hospitals[Math.floor(Math.random() * hospitals.length)]}
+              year={years[Math.floor(Math.random() * years.length)]}
               setShowForm={setShowForm}
               doctor={doctor}
             />
@@ -252,24 +306,23 @@ const DoctorsAppointment = () => {
             </p>
           </div>
         </div> */}
-        
       </div>
       <div className="flex justify-end items-center mx-20">
-          <div className="w-[31%] flex justify-end items-center mt-5">
-            {/* <button
+        <div className="w-[31%] flex justify-end items-center mt-5">
+          {/* <button
               type="submit"
               className="py-[9px] text-[var(--p-color)] px-[27px] font-bold bg-[var(--gray-color)] cursor-pointer shadow-lg rounded-lg"
             >
               Submit
             </button> */}
-            <button
-              onClick={() => nav("/Aafia/Appointment")}
-              className="border border-[var(--gray-color)] px-[30px] py-[8px] outline-none cursor-pointer font-bold rounded-lg text-[var(--gray-color)] "
-            >
-              Back
-            </button>
-          </div>
+          <button
+            onClick={() => nav("/Aafia/Appointment")}
+            className="border border-[var(--gray-color)] px-[30px] py-[8px] outline-none cursor-pointer font-bold rounded-lg text-[var(--gray-color)] "
+          >
+            Back
+          </button>
         </div>
+      </div>
     </div>
   );
 };

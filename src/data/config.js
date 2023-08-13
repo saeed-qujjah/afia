@@ -2,6 +2,7 @@ const BASE_URL = "http://154.62.109.112:8000/api";
 const AUTH_URL = `${BASE_URL}/auth`;
 const PROFILE_URL = `${BASE_URL}/profile`;
 const CONSULTATIONS_URL = `${BASE_URL}/consultation`;
+const APPOINTMENT_URL = `${BASE_URL}/appointment`;
 const ADVICE_URL = `${BASE_URL}/advice`;
 const POST_URL = `${BASE_URL}/post`;
 
@@ -28,6 +29,15 @@ export const API = {
   consultations: {
     CONSULTATIONS: `${CONSULTATIONS_URL}/consultations/`,
     REVIEWS: `${CONSULTATIONS_URL}/reviews/`
+  },
+  appointment: {
+    CREATE_APPOINTMENT: `${APPOINTMENT_URL}/patient-create-appointment/`,
+    ACCEPT_APPOINYMENT: `${APPOINTMENT_URL}/doctor-accept-appointment/`,
+    REJECT_APPOINYMENT: `${APPOINTMENT_URL}/doctor-reject-appointment/`,
+    REQUEST_APPOINYMENT: `${APPOINTMENT_URL}/patient-request-appointment/`,
+    CONFIRM_APPOINYMENT: `${APPOINTMENT_URL}/patient-confirm-appointment/`,
+    CANCEL_APPOINYMENT: `${APPOINTMENT_URL}/patient-cancel-appointment/`,
+    GET_APPOINYMENTS: `${APPOINTMENT_URL}/appointments/`
   },
   advice: {
     ADVICE: `${ADVICE_URL}/advices/`

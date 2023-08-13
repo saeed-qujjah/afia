@@ -1,12 +1,84 @@
-import React from "react";
+import Cookies from "js-cookie";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import swal from "sweetalert";
+import { API } from "../../data/config";
+import axios from "axios";
 
+const AppointmentForm = ({ goBackHandler, specialization, doctor, method }) => {
+  const [appointment, setAppointment] = useState({
+    doctor_id: doctor.id,
+    patient_notes: "",
+    date: null
+  });
 
-const AppointmentForm = ({goBackHandler,specialization,doctor}) => {
-    const submitHandler = (e) => {
-        e.preventDefault()
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const date = appointment.date
+      ? `${appointment.date.getFullYear()}-${
+          appointment.date.getMonth() + 1
+        }-${appointment.date.getDate()}`
+      : null;
+    if (method === "create") {
+      axios
+        .post(
+          API.appointment.CREATE_APPOINTMENT,
+          {
+            doctor_id: appointment.doctor_id,
+            patient_notes: appointment.patient_notes,
+            date: date
+          },
+          {
+            headers: {
+              Authorization: "JWT " + Cookies.get("accessToken")
+            }
+          }
+        )
+        .then((res) => {
+          swal({
+            title: `${res.data.message}`,
+            timer: 3000,
+            icon: "success"
+          });
+          setTimeout(() => {
+            goBackHandler();
+          }, [3040]);
+        })
+        .catch((err) => {
+          swal({
+            icon: "warning",
+            timer: 2100,
+            title: `${err.response.data.message}`
+          });
+        });
+    } else {
+      axios
+        .put(API.appointment.CREATE_APPOINTMENT, appointment, {
+          headers: {
+            Authorization: "JWT " + Cookies.get("accessToken")
+          }
+        })
+        .then((res) => {
+          swal({
+            title: `${res.data.message}`,
+            timer: 3000,
+            icon: "success"
+          });
+          setTimeout(() => {
+            goBackHandler(true);
+          }, [3040]);
+        })
+        .catch((err) => {
+          swal({
+            icon: "warning",
+            timer: 2100,
+            title: `${err.response.data.message}`
+          });
+        });
     }
+  };
+
   return (
     <div
       style={{ backgroundColor: "rgb(0 0 0 / 40%)" }}
@@ -32,46 +104,47 @@ const AppointmentForm = ({goBackHandler,specialization,doctor}) => {
                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                 type="text"
                 name="doctor_id"
-                value={doctor}
-                // onChange={changeHandler}
-                list="doctor"
+                value={`Dr.${doctor.first_name} ${doctor.last_name}`}
+                readOnly
               />
               <label className="top-top">Doctor</label>
             </div>
           </div>
-          <div className="child w-[100%] relative mb-5">
-            {/* <input
-              className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
-              type="text"
-              name="symptoms"
-            //   value={consultation.symptoms}
-            //   onChange={changeHandler}
-              required
-            /> */}
+          <div className="w-[100%] relative flex justify-between items-center">
+            <div
+              style={{ width: "50%" }}
+              className="child w-[100%] relative mb-5"
+            >
               <DatePicker
-                //   className="subchild"
-                  dateFormat="yyyy/MM/dd"
-                  name="birth_date"
-                  isClearable
-                  selected={new Date()}
-                //   onChange={(e) =>
-                //     setCompleteData((prev) => {
-                //       return { ...prev, birth_date: e };
-                //     })
-                //   }
-                />
-            <label className="top-top">Appointment Date *</label>
+                className="subchild"
+                dateFormat="yyyy/MM/dd"
+                name="date"
+                isClearable
+                minDate={new Date()}
+                selected={appointment.date}
+                onChange={(e) =>
+                  setAppointment((prev) => {
+                    return { ...prev, date: e };
+                  })
+                }
+              />
+              <label className="top-top">Booking Date *</label>
+            </div>
+            <div className="child w-[100%] relative mb-5">
+              <input
+                className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
+                type="text"
+                name="patient_notes"
+                value={appointment.patient_notes}
+                onChange={(e) =>
+                  setAppointment((prev) => {
+                    return { ...prev, patient_notes: e.target.value };
+                  })
+                }
+              />
+              <label className="top-top">Notes</label>
+            </div>
           </div>
-          {/* <div className="child w-[100%] relative mb-5">
-            <input
-              className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[100%]"
-              type="text"
-              name="additional_explanation"
-            //   value={consultation.additional_explanation}
-            //   onChange={changeHandler}
-            />
-            <label className="top-top">Additional explanation</label>
-          </div> */}
           <div className="flex justify-end items-center">
             <div className="w-[31%] flex justify-between items-center mb-8 mt-5">
               <button

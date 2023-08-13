@@ -2,98 +2,93 @@ import React from "react";
 import details from "../../global/images/responsability.png";
 import deletes from "../../global/images/delete.png";
 import edit from "../../global/images/edit.png";
-import review from "../../global/images/review.png";
+import accept from "../../global/images/check.png";
+import reject from "../../global/images/rejected.png";
 import { NavLink } from "react-router-dom";
 
 const TrAppointment = ({
-  consultation,
-  onDelete,
-  onReply,
-  onEdit,
-  forReviews,
-  onAddReview,
+  appointment,
+  // onDelete,
+  onAccept,
+  onReject,
+  // onReply,
+  // onEdit,
   isDoctor
 }) => {
-  const createDate = new Date(consultation.created_at);
-  const consultationDate = `${createDate.getFullYear()}-${
-    createDate.getMonth() + 1
-  }-${createDate.getDate()}`;
+  // const createDate = new Date(consultation.created_at);
+  // const consultationDate = `${createDate.getFullYear()}-${
+  //   createDate.getMonth() + 1
+  // }-${createDate.getDate()}`;
+  const status = ["requested", "accepted", "rejected", "confirmed", "canceled"];
   return (
     <tr>
-      {!isDoctor && <td>{consultation.doctor.specialization.name}</td>}
+      {!isDoctor && <td>{appointment.doctor.specialization.name}</td>}
       {!isDoctor && (
         <td>
-          {`${consultation.doctor.first_name} ${consultation.doctor.last_name}`}
+          {`${appointment.doctor.first_name} ${appointment.doctor.last_name}`}
         </td>
       )}
       {isDoctor && (
         <td>
-          {consultation.patient.first_name} {consultation.patient.last_name}
+          {appointment.patient.first_name} {appointment.patient.last_name}
         </td>
       )}
-      <td>{consultation.symptoms}</td>
-      <td>{consultation.symptoms}</td>
-      <td>{consultation.additional_explanation}</td>
-      <td>{consultation.done ? "Done" : "Pending"}</td>
-      <td>{consultationDate}</td>
+      <td>{appointment.date}</td>
+      <td>{appointment.doctor.city.name}</td>
+      <td>{status[appointment.status]}</td>
+      <td>{appointment.time}</td>
+      <td>{isDoctor ? appointment.doctor_notes : appointment.patient_notes}</td>
       <td>
-        {!forReviews && !isDoctor && (
+        {!isDoctor && (
           <div className="flex justify-between items-center w-[60%] m-auto">
-            <img
+            {appointment.status !== 4 && <img
               className="w-6 cursor-pointer"
-              src={deletes}
-              onClick={() => onDelete(consultation.id)}
+              src={reject}
+              onClick={() => onReject(appointment,false)}
               alt=""
-            />
-            {!consultation.done && (
+            />}
+            {appointment.status === 1 && (
               <img
                 className="w-6 cursor-pointer"
-                src={edit}
-                onClick={() => onEdit(consultation)}
+                src={accept}
+                onClick={() => onAccept(appointment,false)}
                 alt=""
               />
             )}
-            {consultation.done && (
+            {/* {appointment.status !== 0 && (
               <img
                 className="w-6 cursor-pointer"
                 src={details}
-                onClick={() => onReply(consultation)}
+                onClick={() => onReply(appointment)}
                 alt=""
               />
-            )}
-            <NavLink to={`/Aafia/ConReview/${consultation.id}`}>
+            )} */}
+            {/* <NavLink to={`/Aafia/ConReview/${consultation.id}`}>
               <img
                 className="w-6 cursor-pointer"
                 src={review}
                 // onClick={() => nav("/Aafia/ConReview/2")}
                 alt=""
               />
-            </NavLink>
+            </NavLink> */}
           </div>
         )}
-        {forReviews && (
-          <div className="flex justify-center items-center w-[50%] m-auto">
-            <p className="text-[var(--gray-color)] font-thin opacity-[85%]">
-              +
-            </p>
+        {isDoctor && appointment.status === 0 && (
+          <div className="flex justify-between items-center w-[40%] m-auto">
+            {/* <NavLink to={`/Aafia/ConRepley/${consultation.id}`}> */}
             <img
               className="w-6 cursor-pointer"
-              src={review}
-              alt="Add Review"
-              onClick={() => onAddReview(consultation)}
+              src={reject}
+              onClick={() => onReject(appointment,true)}
+              alt=""
             />
-          </div>
-        )}
-        {isDoctor && (
-          <div className="flex justify-center items-center w-[50%] m-auto">
-            <NavLink to={`/Aafia/ConRepley/${consultation.id}`}>
-              <img
-                className="w-6 cursor-pointer"
-                src={consultation.done ? edit : details}
-                // onClick={() => nav("/Aafia/ConReview/2")}
-                alt=""
-              />
-            </NavLink>
+            <img
+              className="w-6 cursor-pointer"
+              src={accept}
+              onClick={() => onAccept(appointment,true)}
+              alt=""
+            />
+            {/* </NavLink> */}
           </div>
         )}
       </td>
