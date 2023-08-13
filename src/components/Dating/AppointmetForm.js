@@ -6,11 +6,18 @@ import swal from "sweetalert";
 import { API } from "../../data/config";
 import axios from "axios";
 
-const AppointmentForm = ({ goBackHandler, specialization, doctor, method }) => {
+const AppointmentForm = ({
+  goBackHandler,
+  appointmentData,
+  specialization,
+  doctor,
+  method
+}) => {
+  console.log(appointmentData);
   const [appointment, setAppointment] = useState({
     doctor_id: doctor.id,
-    patient_notes: "",
-    date: null
+    patient_notes: method === "edit" ? appointmentData.patient_notes : "",
+    date: method === "edit" ? new Date(appointmentData.date) : null
   });
 
   const submitHandler = (e) => {
@@ -54,11 +61,19 @@ const AppointmentForm = ({ goBackHandler, specialization, doctor, method }) => {
         });
     } else {
       axios
-        .put(API.appointment.CREATE_APPOINTMENT, appointment, {
-          headers: {
-            Authorization: "JWT " + Cookies.get("accessToken")
+        .put(
+          `${API.appointment.REQUEST_APPOINYMENT}${appointmentData.id}/`,
+          {
+            doctor_id: appointment.doctor_id,
+            patient_notes: appointment.patient_notes,
+            date: date
+          },
+          {
+            headers: {
+              Authorization: "JWT " + Cookies.get("accessToken")
+            }
           }
-        })
+        )
         .then((res) => {
           swal({
             title: `${res.data.message}`,
@@ -66,7 +81,7 @@ const AppointmentForm = ({ goBackHandler, specialization, doctor, method }) => {
             icon: "success"
           });
           setTimeout(() => {
-            goBackHandler(true);
+            goBackHandler();
           }, [3040]);
         })
         .catch((err) => {

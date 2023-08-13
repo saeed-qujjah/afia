@@ -1,14 +1,14 @@
 import React from "react";
 import details from "../../global/images/responsability.png";
 import deletes from "../../global/images/delete.png";
-import edit from "../../global/images/edit.png";
+import repeat from "../../global/images/repeat.png";
 import accept from "../../global/images/check.png";
 import reject from "../../global/images/rejected.png";
 import { NavLink } from "react-router-dom";
 
 const TrAppointment = ({
   appointment,
-  // onDelete,
+  onRepeat,
   onAccept,
   onReject,
   // onReply,
@@ -37,7 +37,7 @@ const TrAppointment = ({
       <td>{appointment.doctor.city.name}</td>
       <td>{status[appointment.status]}</td>
       <td>{appointment.time}</td>
-      <td>{isDoctor ? appointment.doctor_notes : appointment.patient_notes}</td>
+      <td style={{width:"20%"}}>{!isDoctor ? appointment.doctor_notes : appointment.patient_notes}</td>
       <td>
         {!isDoctor && (
           <div className="flex justify-between items-center w-[60%] m-auto">
@@ -52,6 +52,14 @@ const TrAppointment = ({
                 className="w-6 cursor-pointer"
                 src={accept}
                 onClick={() => onAccept(appointment,false)}
+                alt=""
+              />
+            )}
+            {appointment.status === 2 && (
+              <img
+                className="w-6 cursor-pointer"
+                src={repeat}
+                onClick={() => onRepeat(appointment)}
                 alt=""
               />
             )}

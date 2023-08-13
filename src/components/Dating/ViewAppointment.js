@@ -8,13 +8,14 @@ import { API } from "../../data/config";
 import TrAppointment from "./TrAppointment";
 import FormDoctorRepley from "./FormDoctorRepley";
 import AcceptOrCancel from "./AcceptOrCancel";
+import AppointmentForm from "./AppointmetForm";
 // import ConsultationForm from "./ConsultationForm";
 
 const ViewAppointment = () => {
   const [appointmentId, setAppointmentId] = useState("");
   const [appointments, setAppointment] = useState([]);
   // const [showDetails, setShowDetails] = useState(false);
-  // const [showReply, setShowReply] = useState(false);
+  const [showReply, setShowReply] = useState(false);
   const [action, setAction] = useState(false);
   const [showFormDoctor, setShowFormDoctor] = useState(false);
   const [showSureForm, setShowSureForm] = useState(false);
@@ -115,7 +116,11 @@ const ViewAppointment = () => {
     setFetchAgain(!fetchAgain);
     setShowFormDoctor(false);
   };
-console.log(appointments)
+
+  const reRequestHandler = (appointment) => {
+    setShowReply(appointment);
+  };
+
   return (
     <div className="py-20 px-20">
       {showSureForm && (
@@ -132,9 +137,18 @@ console.log(appointments)
           goBackHandler={goBackHandler}
         />
       )}
-      {/* {showReply && (
-        <ReplyForm consultationReply={showReply} onBack={replyBackHandler} />
-      )} */}
+      {showReply && (
+        <AppointmentForm
+          appointmentData={showReply}
+          method="edit"
+          specialization={showReply.doctor.specialization.name}
+          doctor={showReply.doctor}
+          goBackHandler={() => {
+            setShowReply(false);
+            setFetchAgain(!fetchAgain);
+          }}
+        />
+      )}
       <div className="flex justify-between items-center">
         <div className="w-[32%]">
           <p className="text-[var(--greenLigth-color)]">Total Appointments:</p>
@@ -192,7 +206,7 @@ console.log(appointments)
                 // onDelete={deleteHandler}
                 onAccept={acceptedHandler}
                 onReject={rejectedHandler}
-                // onConfirm={confrimBookingHandler}
+                onRepeat={reRequestHandler}
               />
             );
           })}
