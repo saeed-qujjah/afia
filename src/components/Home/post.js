@@ -13,6 +13,7 @@ const Post = ({ post, comments }) => {
   const [showCom, setShowCom] = useState(false);
   const [commentArray, setCommentArray] = useState(comments);
   const postDate = formatDate(new Date(post.created_at));
+  console.log(postDate,post.created_at)
 
   const submitCommentHandler = (e) => {
     e.preventDefault();

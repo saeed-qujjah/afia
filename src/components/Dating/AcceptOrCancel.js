@@ -26,7 +26,7 @@ const AcceptOrCancel = (props) => {
                 onClick={props.onConfrim}
                 className="py-[9px] text-[var(--p-color)] px-[25px] font-bold bg-[var(--gray-color)] cursor-pointer shadow-lg rounded-lg"
               >
-                Cancel
+                {props.action}
               </button>
             </div>
           </div>
