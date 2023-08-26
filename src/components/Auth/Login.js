@@ -55,12 +55,36 @@ const Login = () => {
       });
   };
 
+  const testHandler = (role) => {
+    if(role === 0) {
+      setEmail("LayanHabib187@gmail.com")
+      setPassword("123123")
+    }
+    if(role === 1) {
+      setEmail("AmmarAli58@gmail.com")
+      setPassword("123123")
+    }
+  }
+
   return (
     <div>
       <div
         className='text-[#E4F9F5] relative flex items-center bg-[url("/src/global/images/flat-lay-health-still-life-arrangement-with-copy-space.jpg")]
         w-[100%] h-[100vh] bg-no-repeat bg-cover'
       >
+       <div className="text-[var(--gray-color)] w-[55%] h-[100px] absolute top-2 right-3 flex justify-between items-start">
+        <p className="text-[var(--gray-color)] font-bold pt-2">Click on one of these emails for testing :</p>
+        <div>
+          <div className="flex justify-start items-center" onClick={()=>testHandler(1)}>
+            <p className="mr-3">For patient :</p>
+            <p className="text-lg font-bold cursor-pointer bg-[var(--green-color)] rounded-lg p-1">AmmarAli58@gmail.com</p>
+          </div>
+          <div className="flex justify-start items-center mt-2" onClick={()=>testHandler(0)}>
+            <p className="mr-4">For doctor :</p>
+            <p className="text-lg font-bold cursor-pointer bg-[var(--green-color)] rounded-lg p-1">LayanHabib187@gmail.com</p>
+          </div>
+        </div>
+       </div>
         <div className="z-40 w-[370px] h-[420px] rounded-2xl bg-[#11999E] absolute left-[60%] p-4 shadow-lg">
           <div className="flex justify-center items-center flex-col">
             <h1 className="text-3xl font-bold">Login</h1>

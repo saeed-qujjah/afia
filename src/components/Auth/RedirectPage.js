@@ -13,7 +13,7 @@ const RedirectPage = () => {
       else nav("/CompleteProfileInfo");
     } else {
       if (user ? !user?.email_verified : false) nav("/CodeVerification");
-      else nav("/login");
+      else nav("/AboutUs");
     }
   }, [user, token]);
 
