@@ -13,7 +13,7 @@ const Advices = () => {
     <div className="pt-[85px] ">
       <div className="mb-[100px]">
         <img src={capsule} className="w-[500px] ml-20" alt="" />
-        <div className="w-[277px] text-[var(--gray-color)] bg-[var(--p-color)] h-[114px] absolute top-[416px] left-[120px] rounded-lg">
+        <div className="w-[277px] text-[var(--gray-color)] bg-[var(--p-color)] h-[114px] absolute top-[416px] left-[110px] rounded-lg">
           {data?.data.short_advices[0].content}
         </div>
         <div className="flex justify-between w-[500px] text-[var(--gray-color)] items-center absolute top-36 left-[57%]">

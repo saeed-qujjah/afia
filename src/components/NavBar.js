@@ -28,7 +28,7 @@ const NavBar = ({ page }) => {
 
   return (
     <>
-      <div className="navbar flex justify-between fixed w-[100%] items-center px-20 py-2 bg-[var(--p-color)] z-50 shadow-md">
+      <div className="navbar flex justify-between fixed w-[100%] items-center px-20 py-[11px] bg-[var(--p-color)] z-50 shadow-md">
         <div className="flex justify-between items-center">
           <img className="w-24" src={logo2} alt="" />
         </div>
